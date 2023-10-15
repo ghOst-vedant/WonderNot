@@ -1,5 +1,8 @@
-const User = require("../models/users");
-const { hashPassword, comparePassword } = require("../auth/auth");
+// const User = require("../models/users");
+import { UserModel as User } from "../models/users.js";
+
+import { hashPassword, comparePassword } from "../auth/auth.js";
+
 const test = (req, res) => {
   res.json("Test is Working");
 };
@@ -73,8 +76,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = {
-  test,
-  registerUser,
-  loginUser,
-};
+export { test, registerUser, loginUser };

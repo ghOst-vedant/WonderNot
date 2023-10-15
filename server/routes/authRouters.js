@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 const router = express.Router();
-const { loginUser, registerUser } = require("../controllers/authController");
+import { loginUser, registerUser } from "../controllers/authController.js";
 
 router.use(
   cors({
@@ -9,7 +9,7 @@ router.use(
     origin: "http://localhost:5173",
   })
 );
-// router.get("/", test);
+
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-module.exports = router;
+export { router };
