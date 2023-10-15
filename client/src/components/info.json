@@ -1,0 +1,43 @@
+[
+  {"id":"1",
+    "userImg":"https://tse3.mm.bing.net/th?id=OIP.qFFYq8fnGSy1hb2VICyVAgHaG0&pid=Api&P=0&h=180",
+    "userName":"Alex Tharian",
+    "userTitle":"Philospher",
+    "title": "The Art of Active Listening",
+    "description": "Learn the essential skill of active listening and enhance your communication abilities. Active listening involves fully focusing, understanding, and responding to a speaker, demonstrating empathy and respect. Discover practical tips and techniques to become a better active listener in various contexts.",
+    "image": "https://www.waterford.org/wp-content/uploads/2019/08/stem-t4l-qF9GpDlsDfI-unsplash.jpg"
+  },
+  {"id":"2",
+    "userImg":"https://tse3.mm.bing.net/th?id=OIP.kcaJsnMsMsFRdU6d1m2v6AHaHa&pid=Api&P=0&h=180",
+    "userName":"Aniket Sahu",
+    "userTitle":"Data Scientist",
+    "title": "Unleashing the Potential of Data Science and Machine Learning",
+    "description": "Explore the world of data science and machine learning, where data-driven insights transform industries. This post covers essential concepts such as data preprocessing, statistical analysis, machine learning algorithms, and deep learning frameworks. Gain hands-on experience in data manipulation, model training, and predictive analysis. Elevate your technical skills and contribute meaningfully to the field of data science.",
+    "image": "https://tse2.mm.bing.net/th?id=OIP.fGStyIuHTKSJabFyi1WQlAHaEQ&pid=Api&P=0&h=180"
+  },
+  { 
+    "id":"3",
+    "userImg":"https://tse2.mm.bing.net/th?id=OIP.fYA3SDtXsC0ifoDgr5M82gHaGg&pid=Api&P=0&h=180",
+   "userName":"Tahir S",
+   "userTitle":"Web Developer",
+    "title": "Exploring Web Development with JavaScript",
+    "description": "JavaScript is the backbone of modern web development. Discover the power of JavaScript in creating interactive and dynamic websites. This post guides you through front-end and back-end development using JavaScript frameworks and libraries. Learn about web APIs, asynchronous programming, and building responsive web applications to excel in the digital landscape.",
+    "image": "https://tse3.mm.bing.net/th?id=OIP.GtJcYCsAxne-0sVEbX2kigHaDt&pid=Api&P=0&h=180"
+  },
+  {"id":"4",
+    "userImg":"https://tse4.mm.bing.net/th?id=OIP.Y04Jkg_VJQLs-PV7Itca-QHaHa&pid=Api&P=0&h=180",
+    "userName":"Sunidhi Munshi",
+    "userTitle":"Musician",
+    "title": "Mastering Guitar Techniques",
+    "description": "Explore the art of playing the guitar with finesse. This post covers a range of guitar techniques, including fingerpicking, bending, sliding, and alternate picking. Learn to read guitar tabs, understand chord progressions, and improvise solos. Whether you're a beginner or an experienced guitarist, enhance your skills and create soulful melodies.",
+    "image": "https://tse4.mm.bing.net/th?id=OIP.D_23-bjo_bfbrn66OqsglgHaEk&pid=Api&P=0&h=180"
+  },
+  { "id":"5",
+     "userImg":"https://tse1.mm.bing.net/th?id=OIP.o83SBJamk7HF3wy2XTaaMwHaJO&pid=Api&P=0&h=180",
+       "userName":"Divyakshi Tare",
+       "userTitle":"Blockchain Specialist",
+        "title": "Investing in Cryptocurrencies: Opportunities and Risks",
+        "description": "Curious about cryptocurrencies like Bitcoin and Ethereum? This post explores the world of digital currencies, blockchain technology, and the potential of crypto investments. Understand the risks associated with crypto trading, volatility factors, and long-term investment strategies. Stay updated on the latest trends and developments in the cryptocurrency market to make well-informed investment choices.",
+        "image": "https://tse3.mm.bing.net/th?id=OIP.ndWF4Yw3YOJLwhb7Jj5yzgHaEK&pid=Api&P=0&h=180"
+      }
+]

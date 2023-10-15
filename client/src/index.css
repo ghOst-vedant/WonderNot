@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Suez+One&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add this CSS to your stylesheet */
+.bttn {
+  background-color: white;
+  border: none;
+  /* padding: 5px 10px; */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.bttn:hover {
+  color: #0056b3;
+}
+
+.selected {
+  background-color: #0056b3;
+  color: red;
+}
