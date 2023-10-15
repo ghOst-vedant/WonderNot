@@ -1,8 +1,8 @@
-// const User = require("../models/users");
 import { UserModel as User } from "../models/users.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 import { hashPassword, comparePassword } from "../auth/auth.js";
-
+import Jwt from "jsonwebtoken";
 const test = (req, res) => {
   res.json("Test is Working");
 };
@@ -45,7 +45,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// EndPoint for registered User
+// EndPoint to Login  User
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -64,7 +64,16 @@ const loginUser = async (req, res) => {
     // password check
     const match = await comparePassword(password, user.password);
     if (match) {
-      res.json("password match");
+      // cookie stuff
+      Jwt.sign(
+        { email: user.email, id: user._id, name: user.name },
+        process.env.JWT_SECRET,
+        {},
+        (err, token) => {
+          if (err) throw err;
+          res.cookie("token", token).json(user);
+        }
+      );
     }
     if (!match) {
       res.json({

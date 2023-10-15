@@ -1,9 +1,6 @@
 import express from "express";
-// const dotenv = require("dotenv").config();
 import dotenv from "dotenv";
-// const cors = require("cors");
 import cors from "cors";
-// const { mongoose } = require("mongoose");
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import { router } from "./routes/authRouters.js";
