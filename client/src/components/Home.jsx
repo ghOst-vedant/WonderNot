@@ -39,7 +39,7 @@ const Home = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   return (
     <>
-      <div className="flex flex-row gap-3 w-full h-[90.75vh] px-10 py-2 box-border justify-center">
+      <div className="flex flex-row gap-3 w-full h-[90vh] px-10 py-2 box-border justify-center ">
         {showCreateForm && <CreatePost />}
         {/* User section */}
         <div className=" text-5xl w-[20vw] border flex flex-col items-center shadow-xl h-[60vh] rounded-lg mt-2">
@@ -70,7 +70,7 @@ const Home = () => {
           </div>
         </div>
         {/* Central pos vala section */}
-        <div className=" text-5xl flex-1  overflow-scroll h-[100%] mt-2">
+        <div className="p-5 text-5xl flex-1  overflow-scroll h-[100%] mt-2">
           <div className="flex flex-col gap-4">
             {info.map((el) => (
               <Post
