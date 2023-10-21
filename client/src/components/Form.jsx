@@ -1,16 +1,17 @@
 import React, { StrictMode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios, { all } from "axios";
+import axios from "axios";
+import { Cookies, useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import { GrGoogle, GrApple } from "react-icons/gr";
 import child from "../Assets/kid 1.png";
-import "../index.css";
 const Form = () => {
   // ismai saare entries ayenge
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  const [_, setCookie] = useCookies(["access_token"]);
   const navigate = useNavigate();
   // function on submission where the new entry is created and the allEntry state is updated
   const submitForm = async (error) => {
@@ -26,9 +27,13 @@ const Form = () => {
       } else {
         toast.success("Login Successful");
         setData({});
+        setCookie("access_token", data.token);
+        window.localStorage.setItem("UserId", data.userID);
         navigate("/home");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <StrictMode>

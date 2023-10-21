@@ -1,5 +1,8 @@
-const User = require("../models/users");
-const { hashPassword, comparePassword } = require("../auth/auth");
+import { UserModel as User } from "../models/users.js";
+import dotenv from "dotenv";
+dotenv.config();
+import { hashPassword, comparePassword } from "../auth/auth.js";
+import jwt from "jsonwebtoken";
 const test = (req, res) => {
   res.json("Test is Working");
 };
@@ -36,13 +39,13 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
       gender,
     });
-    return res.json(user);
+    return res.json({ message: "User Created Succesfully" });
   } catch (error) {
     console.log(error);
   }
 };
 
-// EndPoint for registered User
+// EndPoint to Login  User
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,21 +63,17 @@ const loginUser = async (req, res) => {
     }
     // password check
     const match = await comparePassword(password, user.password);
-    if (match) {
-      res.json("password match");
-    }
     if (!match) {
-      res.json({
+      return res.json({
         error: "wrong password",
       });
     }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    res.json({ token, userID: user._id });
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = {
-  test,
-  registerUser,
-  loginUser,
-};
+export { test, registerUser, loginUser };

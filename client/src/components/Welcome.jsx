@@ -3,7 +3,7 @@ import { StrictMode, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import "../index.css";
+
 const Welcome = () => {
   const [data, setData] = useState({
     name: "",
@@ -29,7 +29,7 @@ const Welcome = () => {
         if (data.error) {
           toast.error(data.error);
         } else {
-          toast.success("Account Created Successfully");
+          toast.success(data.message);
           setData({
             name: "",
             email: "",
@@ -38,7 +38,7 @@ const Welcome = () => {
             gender: "",
             agreed: false,
           });
-          navigate("/home");
+          navigate("/login");
         }
       } catch (error) {
         console.log(error);

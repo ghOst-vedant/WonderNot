@@ -1,4 +1,5 @@
 import React from "react";
+import { useCookies } from "react-cookie";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Form from "./components/Form";
 import "./index.css";
@@ -12,6 +13,7 @@ import Post from "./components/Post";
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.withCredentials = true;
 const App = () => {
+  // const [cookies, setCookies] = useCookies(["access_token"]);
   return (
     <div className="box-border">
       <Router>
