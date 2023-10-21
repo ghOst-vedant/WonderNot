@@ -3,6 +3,8 @@ import info from "../components/info.json";
 import Post from "../components/Post.jsx";
 import Chats from "./Chats";
 import CreatePost from "../components/CreatePost";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/features/userSlice";
 const users = [
   {
     id: "1",
@@ -35,20 +37,27 @@ const users = [
     userName: "Divyakshi Tare",
   },
 ];
+
 const Home = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
+
+  const user = useSelector(selectUser);
+
+  console.log(user);
   return (
     <>
       <div className="flex flex-row gap-3 w-full h-[90vh] px-10 py-2 box-border justify-center ">
         {showCreateForm && <CreatePost />}
         {/* User section */}
-        <div className=" text-5xl w-[20vw] border flex flex-col items-center shadow-xl h-[60vh] rounded-lg mt-2">
+        <div className=" text-5xl w-[20vw] border flex flex-col items-center shadow-xl h-[60vh] rounded-lg mt-2 px-5">
           <img
             className="w-[10vw] border border-black rounded-full mt-2"
             src="https://cdn.pixabay.com/photo/2021/11/24/05/19/user-6820232_1280.png"
             alt="as"
           />
-          <h1 className=" text-2xl font-semilbold m-2 mb-5">Hello, User </h1>
+          <h1 className=" text-2xl font-semilbold m-2 mb-5">
+            Hello, {user?.userName}{" "}
+          </h1>
           <div className="flex flex-col justify-normal text-xl font-semilbold border border-black rounded-md p-5">
             <p className=" font-lato border-box mb-5 border-b-2 border-black pb-1 focus:outline-none w-auto">
               Skills

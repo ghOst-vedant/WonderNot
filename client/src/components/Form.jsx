@@ -5,14 +5,17 @@ import { Cookies, useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import { GrGoogle, GrApple } from "react-icons/gr";
 import child from "../Assets/kid 1.png";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/features/userSlice.js";
 const Form = () => {
   // ismai saare entries ayenge
+  const [_, setCookie] = useCookies(["access_token"]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  const [_, setCookie] = useCookies(["access_token"]);
-  const navigate = useNavigate();
   // function on submission where the new entry is created and the allEntry state is updated
   const submitForm = async (error) => {
     error.preventDefault();
@@ -28,7 +31,15 @@ const Form = () => {
         toast.success("Login Successful");
         setData({});
         setCookie("access_token", data.token);
-        window.localStorage.setItem("UserId", data.userID);
+        const userData = {
+          userID: data.userID,
+          userName: data.userName,
+          userEmail: data.userEmail,
+          userGender: data.userGender,
+          userContact: data.userContact,
+        };
+        dispatch(login(userData));
+        // localStorage.setItem("userData", userID);
         navigate("/home");
       }
     } catch (error) {

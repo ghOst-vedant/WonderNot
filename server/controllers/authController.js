@@ -68,9 +68,15 @@ const loginUser = async (req, res) => {
         error: "wrong password",
       });
     }
-
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.json({ token, userID: user._id });
+    res.json({
+      token,
+      userID: user._id,
+      userName: user.name,
+      userEmail: user.email,
+      userGender: user.gender,
+      userContact: user.number,
+    });
   } catch (error) {
     console.log(error);
   }

@@ -8,14 +8,22 @@ const Nav = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
   const logout = () => {
     setCookies("access_token", "");
-    window.localStorage.removeItem("userID");
+    window.localStorage.removeItem("userData");
   };
   // console.log(cookies.access_token);
   return (
     <>
       <div className="h-[10vh] w-auto bg-blue-two">
         <div className="text-white flex flex-row justify-between items-center p-3">
-          <div className="font-lato font-semibold text-2xl">WonderNot</div>
+          {cookies.access_token ? (
+            <Link to={"/home"}>
+              <h1 className="font-lato font-semibold text-2xl">WonderNot</h1>
+            </Link>
+          ) : (
+            <Link to={"/login"}>
+              <h1 className="font-lato font-semibold text-2xl">WonderNot</h1>
+            </Link>
+          )}
           <div className="flex flex-row items-baseline font-lato font-xl text-2xl gap-2">
             {cookies.access_token ? (
               <>
