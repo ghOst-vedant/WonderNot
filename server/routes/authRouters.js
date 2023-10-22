@@ -12,4 +12,4 @@ router.use(
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-export { router };
+export { router as authRoute };

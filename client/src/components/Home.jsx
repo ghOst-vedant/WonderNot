@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import info from "../components/info.json";
 import Post from "../components/Post.jsx";
 import Chats from "./Chats";
 import CreatePost from "../components/CreatePost";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
+import axios from "axios";
+
 const users = [
   {
     id: "1",
@@ -37,25 +39,40 @@ const users = [
     userName: "Divyakshi Tare",
   },
 ];
-
 const Home = () => {
-  const [showCreateForm, setShowCreateForm] = useState(false);
-
+  // using the redux store user
   const user = useSelector(selectUser);
+  // the post show and hide stuff
+  const [showCreatePost, setShowCreatePost] = useState(false);
+  const toggleCreatePost = () => {
+    setShowCreatePost(!showCreatePost);
+  };
 
-  console.log(user);
+  // for user posts and all the available posts
+  const [posts, setposts] = useState([]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get("/post");
+        setposts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPost();
+  }, []);
   return (
     <>
       <div className="flex flex-row gap-3 w-full h-[90vh] px-10 py-2 box-border justify-center ">
-        {showCreateForm && <CreatePost />}
+        {showCreatePost && <CreatePost onClose={toggleCreatePost} />}
         {/* User section */}
-        <div className=" text-5xl w-[20vw] border flex flex-col items-center shadow-xl h-[60vh] rounded-lg mt-2 px-5">
+        <div className=" text-5xl w-[20vw] border flex flex-col items-center shadow-xl h-auto rounded-lg mt-2 px-5">
           <img
-            className="w-[10vw] border border-black rounded-full mt-2"
+            className="w-[10vw] border border-black rounded-full mt-5"
             src="https://cdn.pixabay.com/photo/2021/11/24/05/19/user-6820232_1280.png"
             alt="as"
           />
-          <h1 className=" text-2xl font-semilbold m-2 mb-5">
+          <h1 className=" text-xl font-semilbold m-2 mb-5">
             Hello, {user?.userName}{" "}
           </h1>
           <div className="flex flex-col justify-normal text-xl font-semilbold border border-black rounded-md p-5">
@@ -69,27 +86,25 @@ const Home = () => {
             </ul>
           </div>
           <div
-            className="flex items-center cursor-pointer"
-            onClick={() => {
-              setShowCreateForm(!showCreateForm);
-            }}
+            className="flex items-center cursor-pointer mt-10"
+            onClick={toggleCreatePost}
           >
-            <button className="p-2 ">+</button>
-            <p className="text-3xl mt-2">Create Post</p>
+            <button className="bg-blue-300 text-black p-3 border border-black rounded-xl text-xl">
+              📝 Create Post
+            </button>
           </div>
         </div>
         {/* Central pos vala section */}
         <div className="p-5 text-5xl flex-1  overflow-scroll h-[100%] mt-2">
           <div className="flex flex-col gap-4">
-            {info.map((el) => (
+            {posts.map((post) => (
               <Post
-                key={el._id}
-                userImg={el.userImg}
-                userName={el.userName}
-                userTitle={el.userTitle}
-                title={el.title}
-                description={el.description}
-                image={el.image}
+                key={post._id}
+                userName={user?.userName}
+                // userTitle={post.title}
+                title={post.title}
+                description={post.description}
+                image={post.imageUrl}
               />
             ))}
           </div>

@@ -83,16 +83,18 @@ const Form = () => {
             >
               Forgot password?
             </a>
-            <button className="font-lato font-semilbold rounded-lg bg-blue-one p-2 w-[13.39vw] mt-6 text-white m-auto ">
+            <button className="font-lato font-semilbold rounded-lg bg-blue-one p-2 w-[13.39vw] mt-3 text-white m-auto ">
               Login
             </button>
+            <div className="flex flex-row items-center mt-1">
+              <hr className="  w-[5.5vw] border-t border-black/40 " />
+              <h4 className="  font-lato font-semilbold text-black/60 px-2">
+                Or continue with
+              </h4>
+              <hr className="  w-[5.5vw] border-t border-black/40 " />
+            </div>
           </form>
-          <hr className=" absolute w-[5.35vw] border-t border-black/60 top-[45.90vh] left-[4.76vw] " />
-          <h4 className="absolute top-[44.44vh] left-[10.59vw] font-lato font-semilbold text-black/60">
-            Or continue with
-          </h4>
-          <hr className=" absolute w-[5.35vw] border-t border-black/60 top-[45.90vh]  left-[18.20vw]" />
-          <div className="absolute flex flex-row gap-6 top-[47.0vh] left-[11.54vw] justify-center items-center mt-3">
+          <div className="absolute flex flex-row gap-6 top-[47.0vh] left-[11.54vw] justify-center items-center mt-5">
             <GrGoogle size={30} color="#1A405F" />
             <GrApple size={31} color="#1A405F" />
           </div>
