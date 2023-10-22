@@ -1,14 +1,17 @@
 import React from "react";
 import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../redux/features/userSlice.js";
 // import { Link, Link } from "react-router-hash-link";
 // import { Navigate } from "react-router-dom";
 const Nav = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const logout = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
     setCookies("access_token", "");
-    window.localStorage.removeItem("userData");
+    dispatch(logout());
   };
   // console.log(cookies.access_token);
   return (
@@ -42,7 +45,7 @@ const Nav = () => {
                   to={"/login"}
                   className="border pl-3 pr-3 pt-1 pb-2 rounded-lg"
                 >
-                  <button onClick={logout}>logout</button>
+                  <button onClick={handleLogout}>logout</button>
                 </Link>
               </>
             ) : (
