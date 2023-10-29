@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import { authRoute } from "./routes/authRouters.js";
 import { postRouter } from "./routes/postRouter.js";
+import { usersRouter } from "./routes/UsersRouter.js";
 // db connection
 dotenv.config();
 mongoose
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/", authRoute);
 app.use("/post", postRouter);
+app.use("/users", usersRouter);
 app.listen(port, () => {
   console.log(`✅ Server is running at port ${port}`);
 });

@@ -86,7 +86,7 @@ const Form = () => {
             <button className="font-lato font-semilbold rounded-lg bg-blue-one p-2 w-[13.39vw] mt-3 text-white m-auto ">
               Login
             </button>
-            <div className="flex flex-row items-center mt-1">
+            <div className="flex flex-row items-center mt-5">
               <hr className="  w-[5.5vw] border-t border-black/40 " />
               <h4 className="  font-lato font-semilbold text-black/60 px-2">
                 Or continue with

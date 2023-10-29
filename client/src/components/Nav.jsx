@@ -16,8 +16,8 @@ const Nav = () => {
   // console.log(cookies.access_token);
   return (
     <>
-      <div className="h-[10vh] w-auto bg-blue-two">
-        <div className="text-white flex flex-row justify-between items-center p-3">
+      <div className=" z-30">
+        <div className=" text-[#EBF7FD] bg-[#233142]  flex flex-row justify-between items-center p-3 shadow-xl">
           {cookies.access_token ? (
             <Link to={"/home"}>
               <h1 className="font-lato font-semibold text-2xl">WonderNot</h1>

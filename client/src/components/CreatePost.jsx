@@ -12,6 +12,7 @@ const CreatePost = ({ onClose }) => {
     description: "",
     imageUrl: "",
     userOwner: user.userID,
+    userName: user.userName,
   });
 
   const [show, setshow] = useState(true);
@@ -42,11 +43,11 @@ const CreatePost = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center ">
-      <div className="modal bg-white p-3 rounded-xl shadow-xl border	">
-        <div className=" bg-blue-200 p-10 rounded-xl shadow-xl border border-black backdrop-blur-sm">
+    <div className="fixed inset-0 flex items-center justify-center 	">
+      <div>
+        <div className="flex flex-col bg-blue-200 p-10 rounded-xl shadow-xl border border-black backdrop-blur-sm">
           <button
-            className="absolute left-[32vw] border border-black rounded px-2"
+            className="border border-black rounded px-2 z-50 self-end"
             onClick={onClose}
           >
             Close

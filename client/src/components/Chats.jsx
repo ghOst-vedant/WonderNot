@@ -12,16 +12,8 @@ const Chats = (props) => {
           />
           <div>
             <p className="text-lg font-bold">{props.userName}</p>
-            {/* <p className="text-lg">{props.userTitle}</p> */}
           </div>
         </div>
-        {/* <p className="text-2xl font-bold">{props.title}</p>
-        <p className="text-xl text-justify">{props.description}</p>
-        <img
-          className="mx-auto my-4 w-[70%] "
-          src={props.image}
-          alt="post_img"
-        /> */}
       </div>
     </div>
   );

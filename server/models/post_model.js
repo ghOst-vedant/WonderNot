@@ -13,6 +13,10 @@ const postSchema = new Schema({
     ref: "User",
     required: true,
   },
+  userName: {
+    type: String,
+    required: true,
+  },
 });
 
 const PostModel = mongoose.model("Post", postSchema);

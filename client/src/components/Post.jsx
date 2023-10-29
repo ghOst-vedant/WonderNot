@@ -3,7 +3,7 @@ import React from "react";
 const Post = (props) => {
   return (
     <div>
-      <div className="flex flex-col border border-black rounded-lg py-2 px-4 gap-2 ">
+      <div className="flex flex-col border border-black rounded-lg py-2 px-4 gap-2 shadow-lg">
         <div className="flex p-4 items-center mr-4">
           <img
             className="h-16 w-16 mr-4 rounded-full border"
