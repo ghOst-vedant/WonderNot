@@ -50,7 +50,7 @@ const Welcome = () => {
   return (
     <>
       <div className=" h-screen w-auto flex justify-center items-center   lg:flex-wrap">
-        <div className="h-auto shadow-xl  border rounded-[30px] p-5 flex flex-row pt-5 pl-5  items-center justify-center iphone:flex-wrap 1 ">
+        <div className=" bg-white h-auto shadow-xl  border rounded-[30px] p-5 flex flex-row pt-5 pl-5  items-center justify-center iphone:flex-wrap 1 ">
           <img
             className="2xl:w-[25vw] h-[50vh] iphone:w-auto"
             draggable="false"
@@ -59,7 +59,7 @@ const Welcome = () => {
           />
           <form
             onSubmit={sendForm}
-            className="flex flex-col p-5 pr-5 font-lato font-semilbold"
+            className="flex flex-col p-5 pr-5 font-montserrat font-semilbold"
           >
             <h1 className="font-suez text-xl ">Create a new Account</h1>
             <div className="flex flex-row gap-3 ">
@@ -70,7 +70,7 @@ const Welcome = () => {
                   setData({ ...data, name: e.target.value });
                 }}
                 placeholder="Full Name"
-                className=" font-lato border-box mt-5 mb-2 border-b-2 border-black pb-1 p-2 focus:outline-none w-auto iphone:flex-grow"
+                className=" font-montserrat border-box mt-5 mb-2 border-b-2 border-black pb-1 p-2 focus:outline-none w-auto iphone:flex-grow"
               />
             </div>
             <input
@@ -80,7 +80,7 @@ const Welcome = () => {
                 setData({ ...data, email: e.target.value });
               }}
               placeholder="Email"
-              className=" font-lato border-box mt-5 mb-5 border-b-2 border-black pb-1 p-2 focus:outline-none w-auto"
+              className=" font-montserrat border-box mt-5 mb-5 border-b-2 border-black pb-1 p-2 focus:outline-none w-auto"
             />
             <input
               type="tel"
@@ -89,7 +89,7 @@ const Welcome = () => {
                 setData({ ...data, number: e.target.value });
               }}
               placeholder="Phone"
-              className=" font-lato border-box mt-5 mb-5 border-b-2 border-black pb-1 p-2 focus:outline-none w-auto"
+              className=" font-montserrat border-box mt-5 mb-5 border-b-2 border-black pb-1 p-2 focus:outline-none w-auto"
             />
             <div className="flex flex-col">
               <input
@@ -99,7 +99,7 @@ const Welcome = () => {
                 }}
                 type="password"
                 placeholder="Password"
-                className=" font-lato border-box mt-5 mb-2 border-b-2 border-black p-2 focus:outline-none w-auto"
+                className=" font-montserrat border-box mt-5 mb-2 border-b-2 border-black p-2 focus:outline-none w-auto"
               />
             </div>
             <div className="flex flex-row gap-5 pl-2 mt-2">
@@ -148,7 +148,6 @@ const Welcome = () => {
           </form>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 };

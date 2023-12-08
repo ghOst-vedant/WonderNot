@@ -36,6 +36,7 @@ module.exports = {
       fontFamily: {
         suez: ["Suez One"],
         lato: ["Lato"],
+        montserrat: ["Montserrat"],
       },
     },
   },

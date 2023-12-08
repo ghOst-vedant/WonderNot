@@ -3,6 +3,7 @@ import info from "../components/info.json";
 import Post from "../components/Post.jsx";
 import Chats from "./Chats";
 import CreatePost from "../components/CreatePost";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import axios from "axios";
@@ -34,24 +35,23 @@ const Home = () => {
       <div className="flex flex-row gap-3 w-full h-[90vh] px-10 py-2 box-border justify-center ">
         {showCreatePost && <CreatePost onClose={toggleCreatePost} />}
         {/* User section */}
-        <div className=" text-5xl w-[20vw] flex flex-col items-center  h-auto rounded-lg mt-2 px-5">
+        <div className=" text-xl w-[20vw] flex flex-col items-center  h-auto rounded-lg mt-2 px-5">
           <img
             className="w-[10vw] border border-black rounded-full mt-5"
             src="https://cdn.pixabay.com/photo/2021/11/24/05/19/user-6820232_1280.png"
             alt="as"
           />
-          <h1 className=" text-xl font-semilbold m-2 mb-5">
+          <h1 className=" text-xl font-medium m-2 mb-5 font-montserrat">
             Hello, {user?.userName}{" "}
           </h1>
-          <div className="flex flex-col justify-normal text-xl font-semilbold border border-black rounded-md p-5">
-            <p className=" font-lato border-box mb-5 border-b-2 border-black pb-1 focus:outline-none w-auto">
+          <div className="flex justify-between items-baseline gap-6">
+            <span className=" font-montserrat font-semilbold border-box mb-5 border-b-2 border-black pb-1 focus:outline-none w-auto">
               Skills
-            </p>
-            <ul className="px-5">
-              <li className="list-disc">Web Development</li>
-              <li className="list-disc">Android Development</li>
-              <li className="list-disc">skill-c</li>
-            </ul>
+            </span>
+            <AiOutlinePlus size={20} />
+          </div>
+          <div className="flex flex-col justify-normal text-xl border border-black rounded-md p-5">
+            <ul className="px-5 font-montserrat font-medium"></ul>
           </div>
           <div
             className="flex items-center cursor-pointer mt-10"
@@ -81,7 +81,7 @@ const Home = () => {
         {/* Chat rigt vala section */}
         <div className=" text-5xl w-[20vw]  flex flex-col items-normal">
           <div className="flex flex-col justify-normal text-xl font-semilbold  rounded-md p-5 mt-2">
-            <p className=" font-lato border-box mb-5 border-b-2 border-black pb-1 focus:outline-none w-auto">
+            <p className=" font-montserrat border-box mb-5 border-b-2 border-black pb-1 focus:outline-none w-auto">
               Chats
             </p>
             <div className="flex flex-col gap-4">

@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import { GrGoogle, GrApple } from "react-icons/gr";
 import child from "../Assets/kid 1.png";
 import { useDispatch } from "react-redux";
+import "././../../src/";
 import { login } from "../redux/features/userSlice.js";
 const Form = () => {
   // ismai saare entries ayenge
@@ -56,7 +57,7 @@ const Form = () => {
             className="flex flex-col absolute  justify-items-end ml-[4.76vw] mt-[4.80vh]"
           >
             <h1 className="text-3xl font-suez">Login</h1>
-            <h4 className=" font-lato text-black/60 font-semilbold">
+            <h4 className="font-montserrat text-black/60 font-semilbold">
               Enter account details
             </h4>
             <input
@@ -66,7 +67,7 @@ const Form = () => {
               onChange={(e) => {
                 setData({ ...data, email: e.target.value });
               }}
-              className=" font-lato border-box mt-[5vh] mb-3 border-b-2 border-black p-2 focus:outline-none w-[18.75vw]"
+              className="font-montserrat border-box mt-[5vh] mb-3 border-b-2 border-black p-2 focus:outline-none w-[18.75vw]"
             />
             <input
               type="password"
@@ -75,20 +76,20 @@ const Form = () => {
               onChange={(e) => {
                 setData({ ...data, password: e.target.value });
               }}
-              className=" font-lato mt-5 mb-2 border-b-2 border-black  p-2 focus:outline-none  w-[18.75vw]"
+              className=" font-montserrat mt-5 mb-2 border-b-2 border-black  p-2 focus:outline-none  w-[18.75vw]"
             />
             <a
               href="#"
-              className="font-lato font-bold text-black/50  ml-3 mt-2"
+              className="font-montserrat font-bold text-black/50  ml-3 mt-2"
             >
               Forgot password?
             </a>
-            <button className="font-lato font-semilbold rounded-lg bg-blue-one p-2 w-[13.39vw] mt-3 text-white m-auto ">
+            <button className="font-montserrat font-semilbold rounded-lg bg-blue-one p-2 w-[13.39vw] mt-3 text-white m-auto ">
               Login
             </button>
             <div className="flex flex-row items-center mt-5">
               <hr className="  w-[5.5vw] border-t border-black/40 " />
-              <h4 className="  font-lato font-semilbold text-black/60 px-2">
+              <h4 className="  font-montserrat font-semilbold text-black/60 px-2">
                 Or continue with
               </h4>
               <hr className="  w-[5.5vw] border-t border-black/40 " />
@@ -98,18 +99,12 @@ const Form = () => {
             <GrGoogle size={30} color="#1A405F" />
             <GrApple size={31} color="#1A405F" />
           </div>
-          <a
-            href=""
-            className="absolute top-[55.88vh] ml-[4.76vw] font-lato  text-black/50 font-semilbold"
-          >
-            Don’t have an account?
-          </a>
-          <Link
-            to="/register"
-            className="absolute top-[55.88vh] ml-[16.5vw] font-lato  text-blue-one/100 font-semilbold"
-          >
-            SignUp
-          </Link>
+          <span className="absolute top-[55.88vh] ml-[4.76vw] font-montserrat  text-black/50 font-semilbold text-sm">
+            Dont have an account?{" "}
+            <Link to="/register" className="text-blue-two text-base">
+              Signup
+            </Link>
+          </span>
         </div>
         <div className="absolute border-none h-[62vh] top-[20vh] left-[59vw] w-[17.26vw] bg-blue-two rounded-r-[30px]">
           <img
