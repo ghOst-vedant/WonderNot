@@ -11,7 +11,7 @@ const Chats = (props) => {
             alt="post_img"
           />
           <div>
-            <p className="text-lg font-bold">{props.userName}</p>
+            <p className="text-lg font-montserrat">{props.userName}</p>
           </div>
         </div>
       </div>

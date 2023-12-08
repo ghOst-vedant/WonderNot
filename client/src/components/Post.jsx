@@ -11,13 +11,17 @@ const Post = (props) => {
             alt="post_img"
           />
           <div>
-            <h2 className="text-2xl font-bold">{props.userName}</h2>
-            <p className="text-lg">{props.userTitle}</p>
+            <h2 className="text-xl font-bold font-montserrat ">
+              {props.userName}
+            </h2>
+            <p className="text-lg font-montserrat">{props.userTitle}</p>
           </div>
         </div>
         <div className="mr-4">
-          <p className="text-2xl font-bold">{props.title}</p>
-          <p className="text-xl text-justify">{props.description}</p>
+          <p className="text-xl font-semibold font-montserrat">{props.title}</p>
+          <p className="text-xl text-justify font-montserrat">
+            {props.description}
+          </p>
           <img
             className="mx-auto my-4 w-[70%] rounded-xl"
             src={props.image}
