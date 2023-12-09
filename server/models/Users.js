@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    firstname: {
+    firstName: {
       type: String,
       required: true,
       min: 2,
       max: 50,
     },
-    lastname: {
+    lastName: {
       type: String,
       required: true,
       min: 2,
@@ -35,15 +35,15 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    ocupation: {
+    skills: {
       type: Array,
       default: [],
     },
     location: String,
-    viewedProfile: Number,
-    impression: Number,
   },
   { timestamps: true }
 );
 
-const User = mongoose.model;
+const User = mongoose.model("User", UserSchema);
+
+export default User;
