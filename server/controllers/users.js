@@ -1,4 +1,4 @@
-import User from "../models/Users";
+import User from "../models/User.js";
 
 // Read User on the id basis
 
