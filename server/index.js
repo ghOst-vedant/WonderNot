@@ -38,12 +38,11 @@ app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 // FILE STORAGE //
-
 const storage = multer.diskStorage({
-  destination: (req, res, cb) => {
+  destination: (req, file, cb) => {
     cb(null, "public/assets");
   },
-  filename: (req, res, cb) => {
+  filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
@@ -57,8 +56,8 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
-// Database setup
 
+// Database setup
 const PORT = process.env.PORT || 6001;
 mongoose
   .connect(process.env.MONGO_URL)
