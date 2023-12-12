@@ -10,6 +10,10 @@ import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { themeSettings } from "./theme";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://172.20.10.2:3001/";
+// axios.defaults.withCredentials = true;
 
 const App = () => {
   const mode = useSelector((state) => state.mode);
