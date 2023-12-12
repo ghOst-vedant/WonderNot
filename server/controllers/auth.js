@@ -15,6 +15,17 @@ export const register = async (req, res) => {
       skills,
       location,
     } = req.body;
+    if (password.length < 8) {
+      return res.json({
+        error: "Password must be atleast 8 character in length.",
+      });
+    }
+    const exist = await User.findOne({ email });
+    if (exist) {
+      return res.json({
+        error: "Email already exists.",
+      });
+    }
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const passwordHash = await bcrypt.hash(String(password), salt);
@@ -32,7 +43,8 @@ export const register = async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    // res.status(500).json({ error: err.message });
+    console.log(err);
   }
 };
 
@@ -40,11 +52,19 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    if (!user) return res.status(400).json({ msg: "User does not exist." });
+    if (!user)
+      return res.json({
+        error: "No such User.",
+      });
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
+    if (!isMatch)
+      return res.json({
+        error: "Incorrect Password.",
+      });
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     delete user.password;
     res.status(200).json({ token, user });
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };

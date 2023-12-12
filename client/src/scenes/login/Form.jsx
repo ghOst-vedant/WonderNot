@@ -8,7 +8,6 @@ import {
   Typography,
   useTheme,
   Chip,
-  getAccordionDetailsUtilityClass,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +64,7 @@ const Form = () => {
         password,
       });
       if (data.error) {
-        console.log("Error aara hai");
+        toast.error(data.error);
       } else {
         toast.success("Login Successful");
         setRegister({
@@ -98,9 +97,9 @@ const Form = () => {
         skills,
         picture,
       });
-      console.log(data.event);
-      if (data.event) {
-        toast.error(data.event);
+      console.log(data);
+      if (data.error) {
+        toast.error(data.error);
       } else {
         toast.success("Account Created Successfull");
         setRegister({});
@@ -175,6 +174,7 @@ const Form = () => {
                   <Box>
                     {register.skills.map((skill, index) => (
                       <Chip
+                        required
                         key={index}
                         label={skill}
                         onDelete={() => handleSkillDelete(skill)}
