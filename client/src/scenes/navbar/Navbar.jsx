@@ -1,5 +1,5 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import {
   Box,
   IconButton,
@@ -28,7 +28,6 @@ import FlexBetween from "src/components/styled/FlexBetween";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
-  const [pageType, setPageType] = useState("home");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -87,7 +86,30 @@ const Navbar = () => {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode())}>
+          <IconButton
+            onClick={() => {
+              let mode = "";
+              let icon;
+              let color = "theme.palette.neutral.dark";
+              if (`${theme.palette.mode}` === "dark") {
+                mode = "Light Mode";
+                icon = <LightMode />;
+              } else {
+                mode = "Dark Mode";
+                icon = <DarkMode />;
+              }
+              toast(mode, {
+                style: {
+                  padding: "0.5rem 0.25rem",
+                  boxShadow: `0px 0px 50px ${theme.palette.primary.light}`,
+                  color: `${color}`,
+                },
+                icon: icon,
+                duration: 800,
+              });
+              dispatch(setMode());
+            }}
+          >
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (
@@ -164,8 +186,29 @@ const Navbar = () => {
             gap="3rem"
           >
             <IconButton
-              onClick={() => dispatch(setMode())}
-              sx={{ fontSize: "25px" }}
+              onClick={() => {
+                let mode = "";
+                let icon;
+                let color = "";
+                if (`${theme.palette.mode}` === "dark") {
+                  mode = "Light Mode";
+                  icon = <LightMode />;
+                } else {
+                  mode = "Dark Mode";
+                  icon = <DarkMode />;
+                  color = "theme.palette.neutral.dark";
+                }
+                toast(mode, {
+                  style: {
+                    padding: "0.5rem 0.25rem",
+                    boxShadow: `0 20px 50px rgba(8, 112, 184, 0.7)`,
+                    color: `${color}`,
+                  },
+                  icon: icon,
+                  duration: 800,
+                });
+                dispatch(setMode());
+              }}
             >
               {theme.palette.mode === "dark" ? (
                 <DarkMode sx={{ fontSize: "25px" }} />

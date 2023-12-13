@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div className="app">
       <BrowserRouter>
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} duration={8000} />
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>

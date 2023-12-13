@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../navbar/Navbar";
 import { UserWidget } from "../widgets/UserWidget";
+import MyPostWidget from "../widgets/MyPostWidget";
 
 const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
@@ -20,6 +21,17 @@ const HomePage = () => {
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
+        <Box
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          mt={isNonMobileScreens ? undefined : "2rem"}
+        >
+          <MyPostWidget picturePath={picturePath} />
+        </Box>
+        {isNonMobileScreens && (
+          <>
+            <Box flexBasis={"26%"}></Box>
+          </>
+        )}
       </Box>
     </Box>
   );
