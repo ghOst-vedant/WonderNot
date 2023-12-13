@@ -93,7 +93,7 @@ const Form = () => {
     formData.append("email", register.email);
     formData.append("password", register.password);
     formData.append("location", register.location);
-    formData.append("skills", JSON.stringify(register.skills));
+    formData.append("skills", register.skills);
     formData.append("picture", register.picture);
     try {
       const { data } = await axios.post("auth/register", formData, {
