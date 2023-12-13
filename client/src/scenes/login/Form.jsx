@@ -8,8 +8,10 @@ import {
   Typography,
   useTheme,
   Chip,
+  IconButton,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "src/redux";
@@ -85,24 +87,34 @@ const Form = () => {
   // Register Handler
   const registerSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, password, location, skills, picture } =
-      register;
+    const formData = new FormData();
+    formData.append("firstName", register.firstName);
+    formData.append("lastName", register.lastName);
+    formData.append("email", register.email);
+    formData.append("password", register.password);
+    formData.append("location", register.location);
+    formData.append("skills", JSON.stringify(register.skills));
+    formData.append("picture", register.picture);
     try {
-      const { data } = await axios.post("auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-        location,
-        skills,
-        picture,
+      const { data } = await axios.post("auth/register", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       console.log(data);
       if (data.error) {
         toast.error(data.error);
       } else {
         toast.success("Account Created Successfull");
-        setRegister({});
+        setRegister({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          location: "",
+          skills: [],
+          picture: "",
+        });
         setPageType("login");
       }
     } catch (error) {
@@ -169,7 +181,13 @@ const Form = () => {
                     label="Add Skill"
                     value={newSkill}
                     onChange={(e) => setNewSkill(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSkillAdd()}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton onClick={handleSkillAdd}>
+                          <AddIcon />
+                        </IconButton>
+                      ),
+                    }}
                   />
                   <Box>
                     {register.skills.map((skill, index) => (

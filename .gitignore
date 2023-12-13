@@ -10,7 +10,10 @@ Thumbs.db
 /build/
 /dist/
 node_modules/
-
+assets
 # Ignore configuration files
 .env
 config.js
+.png
+.jpeg
+.jpg

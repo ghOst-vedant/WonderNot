@@ -5,16 +5,8 @@ import User from "../models/User.js";
 /* REGISTER USER */
 export const register = async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      picturePath,
-      friends,
-      skills,
-      location,
-    } = req.body;
+    const { firstName, lastName, email, password, friends, skills, location } =
+      req.body;
     if (password.length < 8) {
       return res.json({
         error: "Password must be atleast 8 character in length.",
@@ -29,7 +21,7 @@ export const register = async (req, res) => {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const passwordHash = await bcrypt.hash(String(password), salt);
-
+    const picturePath = req.file ? req.file.filename : "";
     const newUser = new User({
       firstName,
       lastName,
