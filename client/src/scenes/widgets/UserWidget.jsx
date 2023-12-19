@@ -38,7 +38,7 @@ export const UserWidget = ({ userId, picturePath }) => {
     return null;
   }
 
-  const { firstName, lastName, email, skills, friends, location } = user;
+  const { firstName, lastName, skills, friends, location } = user;
 
   return (
     <>
