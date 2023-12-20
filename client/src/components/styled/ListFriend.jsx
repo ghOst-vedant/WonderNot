@@ -95,7 +95,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
             p={"0.5rem"}
           >
             {skills.map((skill, index) => (
-              <Chip key={index} label={skill} sx={{ fontSize: 10 }} />
+              <Chip key={index} label={skill} sx={{ fontSize: 12 }} />
             ))}
           </Box>
         </Box>

@@ -20,7 +20,9 @@ import {
   Help,
   Menu,
   Close,
+  Logout,
 } from "@mui/icons-material";
+// import { Logout } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "src/redux";
 import { useNavigate } from "react-router-dom";
@@ -164,19 +166,25 @@ const Navbar = () => {
       {!isNonMobileScreens && isMobileMenuToggled && (
         <Box
           position="fixed"
-          right="0"
           top="0"
-          height="65%"
+          right="0"
           zIndex="10"
-          // maxWidth="200px"
-          // minWidth="100px"
-          width="45%"
-          padding={"0rem"}
-          backgroundColor={background}
+          maxWidth="300px"
+          minWidth="100px"
+          maxHeight={"450px"}
+          minHeight={"300px"}
+          padding={"1.5rem 2rem"}
+          backgroundColor={alt}
           borderRadius={"1rem 0rem 0rem 1rem"}
+          boxShadow={`0px 0px 16px ${background}`}
         >
           {/* CLOSE ICON */}
-          <Box display="flex" justifyContent="flex-end" p="1rem">
+          <Box
+            display="flex"
+            position={"fixed"}
+            right={"0.5rem"}
+            justifyContent="flex-end"
+          >
             <IconButton
               onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
               sx={{ fontSize: "25px" }}
@@ -187,11 +195,12 @@ const Navbar = () => {
 
           {/* MENU ITEMS */}
           <FlexBetween
+            mt={"2.5rem"}
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            gap="3rem"
+            gap="2.5rem"
           >
             <IconButton
               onClick={() => {
@@ -209,7 +218,7 @@ const Navbar = () => {
                 toast(mode, {
                   style: {
                     padding: "0.5rem 0.25rem",
-                    boxShadow: `0 20px 50px rgba(8, 112, 184, 0.7)`,
+                    boxShadow: `0 0 30px rgba(8, 112, 184, 0.7)`,
                     color: `${color}`,
                   },
                   icon: icon,
@@ -219,37 +228,14 @@ const Navbar = () => {
               }}
             >
               {theme.palette.mode === "dark" ? (
-                <DarkMode sx={{ fontSize: "25px" }} />
+                <DarkMode sx={{ fontSize: "30px" }} />
               ) : (
-                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                <LightMode sx={{ color: dark, fontSize: "30px" }} />
               )}
             </IconButton>
-            <Message sx={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
-            <FormControl variant="standard" value={fullName}>
-              <Select
-                value={fullName}
-                sx={{
-                  backgroundColor: neutralLight,
-                  width: "150px",
-                  borderRadius: "0.25rem",
-                  p: "0.25rem 0.85rem",
-                  "& .MuiSvgIcon-root": {
-                    pr: "0.25rem",
-                    width: "3rem",
-                  },
-                  "& .MuiSelect-select:focus": {
-                    backgroundColor: alt,
-                  },
-                }}
-                input={<InputBase />}
-              >
-                <MenuItem value={fullName}>
-                  <Typography>{fullName}</Typography>
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>Log Out</MenuItem>
-              </Select>
-            </FormControl>
+            <Message sx={{ fontSize: "30px" }} />
+            <Notifications sx={{ fontSize: "30px" }} />
+            <Logout sx={{ fontSize: "30px" }} onClick={handleLogout} />
           </FlexBetween>
         </Box>
       )}

@@ -12,7 +12,7 @@ import { createTheme } from "@mui/material";
 import { themeSettings } from "./theme";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://192.168.0.100:3001/";
+axios.defaults.baseURL = "http://localhost:3001/";
 // axios.defaults.withCredentials = true;
 
 const App = () => {
