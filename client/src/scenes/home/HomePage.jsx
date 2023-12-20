@@ -9,7 +9,7 @@ import FriendListing from "../widgets/FriendListing";
 
 const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
-  const isNonMobileScreens = useMediaQuery("(min-width:100px)");
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   return (
     <Box>
       <Navbar />

@@ -1,5 +1,12 @@
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
-import { Box, Chip, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Chip,
+  IconButton,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "src/redux";
@@ -23,10 +30,10 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   const medium = palette.neutral.medium;
   const friendsArray = Object.values(friends);
   const isFriend = friendsArray.find((friend) => friend._id === friendId);
-
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
+      `http://192.168.0.100:3001/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {
@@ -41,7 +48,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
 
   const getUser = async () => {
     const response = await axios.get(
-      `http://localhost:3001/users/${friendId}`,
+      `http://192.168.0.100:3001/users/${friendId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -80,7 +87,13 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
             {name}
           </Typography>
           {/* {skill} */}
-          <Box ml={"0.25rem"} display={"flex"} gap={"0.35rem"} p={"0.5rem"}>
+          <Box
+            ml={"0.25rem"}
+            display={"flex"}
+            flexDirection={isNonMobileScreens ? "row" : "column"}
+            gap={"0.35rem"}
+            p={"0.5rem"}
+          >
             {skills.map((skill, index) => (
               <Chip key={index} label={skill} sx={{ fontSize: 10 }} />
             ))}
