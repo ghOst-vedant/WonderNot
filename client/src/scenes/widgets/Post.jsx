@@ -36,7 +36,7 @@ const Post = ({
 
   const patchLike = async () => {
     const response = await axios.patch(
-      `http://192.168.0.100:3001/posts/${postId}/like`,
+      `http://localhost:3001/posts/${postId}/like`,
       { userId: loggedInUserId },
       {
         headers: {
@@ -50,7 +50,7 @@ const Post = ({
 
   return (
     <>
-      <WidgetWrapper m={"2rem 0"}>
+      <WidgetWrapper m={"2rem 0"} display={"flex"} flexDirection={"column"}>
         {" "}
         <Friend
           friendId={postUserId}
@@ -66,10 +66,13 @@ const Post = ({
           <>
             {" "}
             <img
-              width={"100%"}
-              height={"auto"}
-              style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-              src={`http://192.168.0.100:3001/assets/${picturePath}`}
+              width={"50%"}
+              style={{
+                borderRadius: "0.75rem",
+                margin: "0.75rem",
+                alignSelf: "center",
+              }}
+              src={`http://localhost:3001/assets/${picturePath}`}
               alt="post"
             />
           </>

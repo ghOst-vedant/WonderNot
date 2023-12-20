@@ -1,14 +1,4 @@
-import {
-  EditOutlined,
-  DeleteOutlined,
-  GifBoxOutlined,
-  ImageOutlined,
-  MicOutlined,
-  MoreHorizOutlined,
-  AttachFileOutlined,
-  Description,
-  Login,
-} from "@mui/icons-material";
+import { EditOutlined, DeleteOutlined } from "@mui/icons-material";
 import {
   Box,
   Divider,
@@ -18,7 +8,6 @@ import {
   Button,
   IconButton,
   useMediaQuery,
-  TextField,
 } from "@mui/material";
 import Dropzone from "react-dropzone";
 import FlexBetween from "src/components/styled/FlexBetween";
@@ -37,7 +26,6 @@ const MyPostWidget = ({ picturePath }) => {
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
@@ -87,8 +75,8 @@ const MyPostWidget = ({ picturePath }) => {
           sx={{
             width: "100%",
             bgcolor: palette.neutral.light,
-            borderRadius: "2rem",
-            p: "1rem 0.95rem",
+            borderRadius: "1.5rem",
+            p: "1.2rem 1.8rem",
           }}
         />
       </FlexBetween>
@@ -142,8 +130,8 @@ const MyPostWidget = ({ picturePath }) => {
         </>
       )}
       <Divider sx={{ margin: "1.25rem 0" }} />
-      <FlexBetween>
-        <FlexBetween gap={"0.25rem"} onClick={() => setIsImage(!isImage)}>
+      <Box display={"flex"} justifyContent={"flex-end"}>
+        {/* <FlexBetween gap={"0.25rem"} onClick={() => setIsImage(!isImage)}>
           <ImageOutlined sx={{ color: mediumMain }} />
           <Typography
             color={mediumMain}
@@ -151,7 +139,7 @@ const MyPostWidget = ({ picturePath }) => {
           >
             Image
           </Typography>
-        </FlexBetween>
+        </FlexBetween> */}
         <Button
           disabled={!post}
           onClick={handlePost}
@@ -167,7 +155,7 @@ const MyPostWidget = ({ picturePath }) => {
         >
           Post
         </Button>
-      </FlexBetween>
+      </Box>
     </WidgetWrapper>
   );
 };
