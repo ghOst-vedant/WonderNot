@@ -81,13 +81,14 @@ const MyPostWidget = ({ picturePath }) => {
         <UserImage image={picturePath} />
         <InputBase
           value={post}
+          multiline
           placeholder="What's on your mind...."
           onChange={(e) => setPost(e.target.value)}
           sx={{
             width: "100%",
             bgcolor: palette.neutral.light,
             borderRadius: "2rem",
-            p: "1rem 1.5rem",
+            p: "1rem 0.95rem",
           }}
         />
       </FlexBetween>
@@ -157,11 +158,10 @@ const MyPostWidget = ({ picturePath }) => {
           sx={{
             color: palette.primary.dark,
             borderRadius: "2rem",
-            boxShadow: `0 0px 10px ${palette.primary.main}`,
             "&:hover": {
               bgcolor: palette.primary.main,
               cursor: "pointer",
-              boxShadow: `0 0px 10px ${palette.primary.light}}`,
+              boxShadow: `0 0px 6px ${palette.primary.light}}`,
             },
           }}
         >

@@ -90,16 +90,28 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
       {_id !== friendId && (
         <Box alignSelf={"flex-start"}>
           <IconButton
-            onClick={() => patchFriend()}
+            onClick={patchFriend}
             sx={{
               backgroundColor: primaryLight,
               p: "0.5rem",
+              "&:hover": {
+                backgroundColor: primaryLight,
+                boxShadow: `0 0px 6px ${palette.primary.light}}`,
+              },
             }}
           >
             {isFriend ? (
-              <PersonRemoveOutlined sx={{ color: primaryDark }} />
+              <PersonRemoveOutlined
+                sx={{
+                  color: primaryDark,
+                }}
+              />
             ) : (
-              <PersonAddOutlined sx={{ color: primaryDark }} />
+              <PersonAddOutlined
+                sx={{
+                  color: primaryDark,
+                }}
+              />
             )}
           </IconButton>
         </Box>
