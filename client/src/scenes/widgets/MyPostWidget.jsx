@@ -37,7 +37,7 @@ const MyPostWidget = ({ picturePath }) => {
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  //   const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
+  const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
@@ -56,7 +56,6 @@ const MyPostWidget = ({ picturePath }) => {
     try {
       const formData = new FormData();
       formData.append("userId", _id);
-      console.log(post, image, _id);
       formData.append("description", post);
       if (image) {
         formData.append("picture", image);

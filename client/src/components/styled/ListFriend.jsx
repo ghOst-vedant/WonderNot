@@ -6,8 +6,11 @@ import { setFriends } from "src/redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import { dark } from "@mui/material/styles/createPalette";
-
-const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+import WidgetWrapper from "./WidgetWrapper";
+const ListFriend = ({ friendId, name, userPicturePath }) => {
+  const [skills, setSkills] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -36,10 +39,27 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     dispatch(setFriends({ friends: data }));
   };
 
+  const getUser = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/users/${friendId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = response.data.skills;
+    setSkills(data);
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
-    <FlexBetween>
-      <FlexBetween gap="1rem">
-        <UserImage image={userPicturePath} size="55px" />
+    <Box
+      display={"flex"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <FlexBetween gap="0.5rem">
+        <UserImage image={userPicturePath} size="65px" />
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
@@ -59,25 +79,33 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           >
             {name}
           </Typography>
-          <Typography color={medium} fontSize="0.75rem">
-            {subtitle}
-          </Typography>
+          {/* {skill} */}
+          <Box ml={"0.25rem"} display={"flex"} gap={"0.35rem"} p={"0.5rem"}>
+            {skills.map((skill, index) => (
+              <Chip key={index} label={skill} sx={{ fontSize: 10 }} />
+            ))}
+          </Box>
         </Box>
       </FlexBetween>
       {_id !== friendId && (
-        <IconButton
-          onClick={() => patchFriend()}
-          sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-        >
-          {isFriend ? (
-            <PersonRemoveOutlined sx={{ color: primaryDark }} />
-          ) : (
-            <PersonAddOutlined sx={{ color: primaryDark }} />
-          )}
-        </IconButton>
+        <Box alignSelf={"flex-start"}>
+          <IconButton
+            onClick={() => patchFriend()}
+            sx={{
+              backgroundColor: primaryLight,
+              p: "0.5rem",
+            }}
+          >
+            {isFriend ? (
+              <PersonRemoveOutlined sx={{ color: primaryDark }} />
+            ) : (
+              <PersonAddOutlined sx={{ color: primaryDark }} />
+            )}
+          </IconButton>
+        </Box>
       )}
-    </FlexBetween>
+    </Box>
   );
 };
 
-export default Friend;
+export default ListFriend;

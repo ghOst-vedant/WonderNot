@@ -37,7 +37,7 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const [newSkill, setNewSkill] = useState("");
+  const [newSkill, setNewSkill] = useState([]);
 
   const handleSkillAdd = () => {
     if (newSkill.trim() !== "" && !register.skills.includes(newSkill)) {
@@ -45,7 +45,7 @@ const Form = () => {
         ...prevRegister,
         skills: [...prevRegister.skills, newSkill],
       }));
-      setNewSkill("");
+      setNewSkill([]);
     }
   };
 
@@ -85,6 +85,7 @@ const Form = () => {
   };
 
   // Register Handler
+
   const registerSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -93,7 +94,9 @@ const Form = () => {
     formData.append("email", register.email);
     formData.append("password", register.password);
     formData.append("location", register.location);
-    formData.append("skills", register.skills);
+    register.skills.forEach((skill, index) => {
+      formData.append(`skills[${index}]`, skill);
+    });
     formData.append("picture", register.picture);
     try {
       const { data } = await axios.post("auth/register", formData, {
@@ -101,7 +104,6 @@ const Form = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data);
       if (data.error) {
         toast.error(data.error);
       } else {

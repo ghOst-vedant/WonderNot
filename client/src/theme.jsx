@@ -75,30 +75,30 @@ export const themeSettings = (mode) => {
           }),
     },
     typography: {
-      fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+      fontFamily: ["Montserrat", "Sans-Serif"].join(","),
       fontSize: 12,
       h1: {
-        fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+        fontFamily: ["Montserrat", "Sans-Serif"].join(","),
         fontSize: 40,
       },
       h2: {
-        fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+        fontFamily: ["Montserrat", "Sans-Serif"].join(","),
         fontSize: 32,
       },
       h3: {
-        fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+        fontFamily: ["Montserrat", "Sans-Serif"].join(","),
         fontSize: 24,
       },
       h4: {
-        fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+        fontFamily: ["Montserrat", "Sans-Serif"].join(","),
         fontSize: 20,
       },
       h5: {
-        fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+        fontFamily: ["Montserrat", "Sans-Serif"].join(","),
         fontSize: 16,
       },
       h6: {
-        fontFamily: ["DM Sans", "Sans-Serif"].join(","),
+        fontFamily: ["Montserrat", "Sans-Serif"].join(","),
         fontSize: 14,
       },
     },

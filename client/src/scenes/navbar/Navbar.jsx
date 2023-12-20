@@ -49,6 +49,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(setLogout());
+    toast.success("Logged out");
     // toast.error("Logout Successful");
   };
   return (
@@ -124,7 +125,7 @@ const Navbar = () => {
               value={fullName}
               sx={{
                 backgroundColor: neutralLight,
-                width: "150px",
+                width: "170px",
                 borderRadius: "0.5rem",
                 p: "0.25rem 1rem",
                 "& .MuiSvgIcon-root": {
@@ -140,7 +141,14 @@ const Navbar = () => {
               <MenuItem value={fullName}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
-              <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  dispatch(setLogout());
+                  toast.success("Logged out");
+                }}
+              >
+                Log Out
+              </MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
