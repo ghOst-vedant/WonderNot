@@ -52,7 +52,6 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(setLogout());
     toast.success("Logged out");
-    // toast.error("Logout Successful");
   };
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>

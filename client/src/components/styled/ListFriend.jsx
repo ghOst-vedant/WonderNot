@@ -33,7 +33,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const patchFriend = async () => {
     const response = await fetch(
-      `http://192.168.0.100:3001/users/${_id}/${friendId}`,
+      `http://localhost:3001/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {
@@ -48,7 +48,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
 
   const getUser = async () => {
     const response = await axios.get(
-      `http://192.168.0.100:3001/users/${friendId}`,
+      `http://localhost:3001/users/${friendId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
