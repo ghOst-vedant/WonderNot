@@ -16,9 +16,12 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
-    const response = await axios.get(`http://localhost:3001/users/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(
+      `http://wondernot.onrender.com/users/${userId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.data;
     setUser(data);
   };

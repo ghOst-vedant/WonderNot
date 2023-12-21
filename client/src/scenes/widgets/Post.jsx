@@ -36,7 +36,7 @@ const Post = ({
 
   const patchLike = async () => {
     const response = await axios.patch(
-      `http://localhost:3001/posts/${postId}/like`,
+      `http://wondernot.onrender.com/posts/${postId}/like`,
       { userId: loggedInUserId },
       {
         headers: {

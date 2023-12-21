@@ -7,7 +7,6 @@ import {
   useTheme,
   Button,
   IconButton,
-  useMediaQuery,
 } from "@mui/material";
 import Dropzone from "react-dropzone";
 import FlexBetween from "src/components/styled/FlexBetween";
