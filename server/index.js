@@ -44,6 +44,10 @@ cloudinary.config({
 app.post("/auth/register", singleUpload, register);
 app.post("/posts", verifyToken, singleUpload, createPost);
 
+app.get("/", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
+
 //Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
