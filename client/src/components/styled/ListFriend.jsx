@@ -12,10 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "src/redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
-import { dark } from "@mui/material/styles/createPalette";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import WidgetWrapper from "./WidgetWrapper";
 const ListFriend = ({ friendId, name, userPicturePath }) => {
   const [skills, setSkills] = useState([]);
   const dispatch = useDispatch();
