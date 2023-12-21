@@ -38,7 +38,7 @@ const FriendListing = ({ userId }) => {
         Friends List
       </Typography>
       <Box display={"flex"} flexDirection={"column"} gap={"1.5rem"}>
-        {friends.map((friend, index) => (
+        {friends.map((friend) => (
           <ListFriend
             key={friend._id}
             friendId={friend._id}
