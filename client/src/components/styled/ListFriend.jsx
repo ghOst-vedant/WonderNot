@@ -27,7 +27,6 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
-  const medium = palette.neutral.medium;
   const friendsArray = Object.values(friends);
   const isFriend = friendsArray.find((friend) => friend._id === friendId);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");

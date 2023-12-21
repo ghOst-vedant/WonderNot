@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-
+import { getDataUri } from "../middleware/dataUri.js";
+import cloudinary from "cloudinary";
 /* REGISTER USER */
 export const register = async (req, res) => {
   try {
@@ -18,16 +19,24 @@ export const register = async (req, res) => {
         error: "Email already exists.",
       });
     }
+    const picture = req.file;
+    const fileUri = getDataUri(picture);
+
+    const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
+      folder: "UserImages",
+    });
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const passwordHash = await bcrypt.hash(String(password), salt);
-    const picturePath = req.file ? req.file.filename : "";
     const newUser = new User({
       firstName,
       lastName,
       email,
       password: passwordHash,
-      picturePath,
+      picturePath: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
       friends,
       location,
       skills,

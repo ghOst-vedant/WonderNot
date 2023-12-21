@@ -72,7 +72,7 @@ const Post = ({
                 margin: "0.75rem",
                 alignSelf: "center",
               }}
-              src={`http://localhost:3001/assets/${picturePath}`}
+              src={`${picturePath.url}`}
               alt="post"
             />
           </>

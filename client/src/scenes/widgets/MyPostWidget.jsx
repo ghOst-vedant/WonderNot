@@ -26,7 +26,6 @@ const MyPostWidget = ({ picturePath }) => {
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
   const createPostRequest = async (formData, token) => {
