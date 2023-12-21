@@ -25,10 +25,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 8,
     },
-    picturePath: {
-      public_id: String,
-      url: String,
-    },
+    picturePath: String,
     friends: {
       type: Array,
       default: [],

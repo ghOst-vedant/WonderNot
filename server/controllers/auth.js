@@ -33,10 +33,7 @@ export const register = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      picturePath: {
-        public_id: myCloud.public_id,
-        url: myCloud.secure_url,
-      },
+      picturePath: myCloud.secure_url,
       friends,
       location,
       skills,
