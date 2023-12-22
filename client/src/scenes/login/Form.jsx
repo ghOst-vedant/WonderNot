@@ -151,7 +151,7 @@ const Form = () => {
     <>
       <form onSubmit={isLogin ? loginSubmit : registerSubmit}>
         {isNonMobile ? (
-          <Box display={"flex"} width={"100%"} margin={"auto"}>
+          <Box display={"flex"} width={"100%"} margin={"auto"} mt={"3rem"}>
             {isLogin ? (
               <Box
                 width={"60%"}
