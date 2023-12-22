@@ -235,7 +235,7 @@ const Form = () => {
                           ),
                         }}
                       />
-                      <Box>
+                      <Box display={"flex"} flexWrap={"wrap"}>
                         {register.skills.map((skill, index) => (
                           <Chip
                             required
@@ -452,7 +452,7 @@ const Form = () => {
                           ),
                         }}
                       />
-                      <Box>
+                      <Box display={"flex"} flexWrap={"wrap"}>
                         {register.skills.map((skill, index) => (
                           <Chip
                             required
