@@ -18,8 +18,8 @@ import { setLogin } from "src/redux";
 import Dropzone from "react-dropzone";
 import FlexBetween from "src/components/styled/FlexBetween";
 import toast from "react-hot-toast";
-import login from "../.././../public/assets/login.svg";
-import signup from "../.././../public/assets/signup.svg";
+import login from "/assets/login.svg";
+import signup from "/assets/signup.svg";
 const Form = () => {
   const [pageType, setPageType] = useState("login");
   const [register, setRegister] = useState({
