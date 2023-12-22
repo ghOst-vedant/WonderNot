@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "src/redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
+import toast from "react-hot-toast";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
@@ -17,22 +18,40 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
-  const friendsArray = Object.values(friends);
-  const isFriend = friendsArray.find((friend) => friend._id === friendId);
-  // console.log(userPicturePath.url);
+  const friendsArray = friends && Object.values(friends);
+  const isFriend =
+    friendsArray && friendsArray.find((friend) => friend._id === friendId);
+
+  const friendRequest = async (token) => {
+    try {
+      const response = await fetch(
+        `https://wondernot.onrender.com/users/${_id}/${friendId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.json();
+    } catch (error) {
+      throw error;
+    }
+  };
   const patchFriend = async () => {
-    const response = await fetch(
-      `http://wondernot.onrender.com/users/${_id}/${friendId}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    dispatch(setFriends({ friends: data }));
+    try {
+      const response = await toast.promise(friendRequest(token), {
+        pending: "Updating Friends...",
+        success: "Friends updated!!!",
+        error: "Error adding friend. Please try again.",
+      });
+      dispatch(setFriends({ friends: response }));
+    } catch (error) {
+      console.log("====================================");
+      console.log("Adding friend error: ", error);
+      console.log("====================================");
+    }
   };
 
   return (

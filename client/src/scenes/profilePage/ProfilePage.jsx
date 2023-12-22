@@ -16,12 +16,9 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
-    const response = await axios.get(
-      `http://wondernot.onrender.com/users/${userId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await axios.get(`/users/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.data;
     setUser(data);
   };
@@ -41,14 +38,14 @@ const ProfilePage = () => {
         p={"2rem 6%"}
         display={isNonMobileScreens ? "flex" : "block"}
         gap={"5rem"}
-        // justifyContent={"center"}
       >
         <Box
-          flexBasis={isNonMobileScreens ? "25%" : undefined}
+          // flexBasis={isNonMobileScreens ? "25%" : undefined}
+          width={isNonMobileScreens ? "31%" : undefined}
           display={"flex"}
           flexDirection={"column"}
           justifyContent={"flex-start"}
-          gap={"2rem"}
+          gap={"0rem"}
         >
           <UserWidget userId={userId} picturePath={user.picturePath} />
           <Box m={isNonMobileScreens ? "2rem" : "0"} ml={"0"}>
@@ -60,7 +57,7 @@ const ProfilePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget picturePath={user.picturePath} />
-          <Box m={isNonMobileScreens ? "2rem" : "0"}>
+          <Box m={isNonMobileScreens ? "0.5rem" : "0"}>
             <PostsWidget userId={userId} isProfile />
           </Box>
         </Box>

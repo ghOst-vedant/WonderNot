@@ -38,7 +38,7 @@ const MyPostWidget = ({ picturePath }) => {
       throw error;
     }
   };
-  const handlePost = async (event) => {
+  const handlePost = async () => {
     try {
       const formData = new FormData();
       formData.append("userId", _id);

@@ -12,7 +12,7 @@ import { createTheme } from "@mui/material";
 import { themeSettings } from "./theme";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://wondernot.onrender.com";
+axios.defaults.baseURL = "https://wondernot.onrender.com/";
 // axios.defaults.withCredentials = true;
 
 const App = () => {
