@@ -19,12 +19,16 @@ export const register = async (req, res) => {
         error: "Email already exists.",
       });
     }
-    const picture = req.file;
-    const fileUri = getDataUri(picture);
+    let picPath = "";
+    if (req.file) {
+      const picture = req.file;
+      const fileUri = getDataUri(picture);
 
-    const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
-      folder: "UserImages",
-    });
+      const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
+        folder: "UserImages",
+      });
+      picPath = myCloud.secure_url;
+    }
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const passwordHash = await bcrypt.hash(String(password), salt);
@@ -33,7 +37,7 @@ export const register = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      picturePath: myCloud.secure_url,
+      picturePath: picPath,
       friends,
       location,
       skills,

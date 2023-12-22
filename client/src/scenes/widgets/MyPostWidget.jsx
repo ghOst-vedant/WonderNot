@@ -63,7 +63,7 @@ const MyPostWidget = ({ picturePath }) => {
   };
   return (
     <WidgetWrapper>
-      <FlexBetween gap={"1.5rem"}>
+      <FlexBetween gap={"1.75rem"}>
         <UserImage image={picturePath} />
         <InputBase
           value={post}
@@ -113,10 +113,7 @@ const MyPostWidget = ({ picturePath }) => {
                     )}
                   </Box>
                   {image && (
-                    <IconButton
-                      onClick={() => setImage(null)}
-                      //   sx={{ width: "" }}
-                    >
+                    <IconButton onClick={() => setImage(null)}>
                       {" "}
                       <DeleteOutlined />{" "}
                     </IconButton>
@@ -127,7 +124,7 @@ const MyPostWidget = ({ picturePath }) => {
           </Box>
         </>
       )}
-      <Divider sx={{ margin: "1.25rem 0" }} />
+      <Divider sx={{ mt: "1rem", mb: "0.5rem" }} />
       <Box display={"flex"} justifyContent={"flex-end"}>
         {/* <FlexBetween gap={"0.25rem"} onClick={() => setIsImage(!isImage)}>
           <ImageOutlined sx={{ color: mediumMain }} />
@@ -142,10 +139,13 @@ const MyPostWidget = ({ picturePath }) => {
           disabled={!post}
           onClick={handlePost}
           sx={{
-            color: palette.primary.dark,
+            fontSize: 13,
+            color: palette.primary.main,
             borderRadius: "2rem",
+            p: "0.5rem",
             "&:hover": {
               bgcolor: palette.primary.main,
+              color: palette.primary.dark,
               cursor: "pointer",
               boxShadow: `0 0px 6px ${palette.primary.light}}`,
             },

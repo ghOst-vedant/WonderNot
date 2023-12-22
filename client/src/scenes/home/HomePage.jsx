@@ -17,14 +17,14 @@ const HomePage = () => {
         width={"100%"}
         p={isNonMobileScreens ? "2rem 3%" : "2rem 6%"}
         display={isNonMobileScreens ? "flex" : "block"}
-        gap={"0.75rem"}
+        gap={"1.5rem"}
         justifyContent={"space-between"}
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
         <Box
-          flexBasis={isNonMobileScreens ? "45%" : undefined}
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget picturePath={picturePath} />

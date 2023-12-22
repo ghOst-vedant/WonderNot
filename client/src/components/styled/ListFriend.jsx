@@ -6,6 +6,7 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Divider,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   const friendRequest = async (token) => {
     try {
       const response = await fetch(
-        `https://wondernot.onrender.com/users/${_id}/${friendId}`,
+        `${import.meta.env.VITE_BACKENDURL}/users/${_id}/${friendId}`,
         {
           method: "PATCH",
           headers: {
@@ -62,86 +63,100 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   };
 
   const getUser = async () => {
-    const response = await axios.get(`users/${friendId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = response.data.skills;
-    setSkills(data);
+    if (friendId) {
+      try {
+        const response = await axios.get(`users/${friendId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = response.data.skills;
+        setSkills(data);
+      } catch (error) {
+        console.log("Error fetching User friends: "), error;
+      }
+    }
   };
   useEffect(() => {
     getUser();
   }, []);
+
   return (
-    <Box
-      display={"flex"}
-      justifyContent={"space-between"}
-      alignItems={"center"}
-    >
-      <FlexBetween gap="0.5rem">
-        <UserImage image={userPicturePath} size="65px" />
-        <Box
-          onClick={() => {
-            navigate(`/profile/${friendId}`);
-            navigate(0);
-          }}
-        >
-          <Typography
-            color={main}
-            variant="h5"
-            fontWeight="500"
-            sx={{
-              "&:hover": {
-                color: palette.primary.light,
-                cursor: "pointer",
-              },
-            }}
-          >
-            {name}
-          </Typography>
-          {/* {skill} */}
+    <>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <FlexBetween gap="0.75rem">
+          <UserImage image={userPicturePath} size="60px" />
           <Box
-            ml={"0.25rem"}
-            display={"flex"}
-            flexDirection={isNonMobileScreens ? "row" : "column"}
-            gap={"0.35rem"}
-            p={"0.5rem"}
-          >
-            {skills.map((skill, index) => (
-              <Chip key={index} label={skill} sx={{ fontSize: 12 }} />
-            ))}
-          </Box>
-        </Box>
-      </FlexBetween>
-      {_id !== friendId && (
-        <Box alignSelf={"flex-start"}>
-          <IconButton
-            onClick={patchFriend}
-            sx={{
-              backgroundColor: primaryLight,
-              p: "0.5rem",
-              "&:hover": {
-                backgroundColor: primaryLight,
-                boxShadow: `0 0px 6px ${palette.primary.light}}`,
-              },
+            alignSelf={"flex-start"}
+            onClick={() => {
+              navigate(`/profile/${friendId}`);
+              navigate(0);
             }}
           >
-            {isFriend ? (
-              <PersonRemoveOutlined
-                sx={{
-                  color: primaryDark,
-                }}
-              />
-            ) : (
-              <PersonAddOutlined
-                sx={{
-                  color: primaryDark,
-                }}
-              />
+            <Typography
+              color={main}
+              variant="h6"
+              fontWeight={"500"}
+              fontSize={14}
+              sx={{
+                "&:hover": {
+                  color: palette.primary.light,
+                  cursor: "pointer",
+                },
+              }}
+            >
+              {name}
+            </Typography>
+            {/* {skill} or {location} */}
+
+            {skills && (
+              <Box
+                ml={"0.25rem"}
+                display={"flex"}
+                flexWrap={"wrap"}
+                gap={"0.35rem"}
+              >
+                {skills.map((skill, index) => (
+                  <Chip key={index} label={skill} sx={{ fontSize: 11 }} />
+                ))}
+              </Box>
             )}
-          </IconButton>
-        </Box>
-      )}
-    </Box>
+          </Box>
+        </FlexBetween>
+        {_id !== friendId && (
+          <Box alignSelf={"flex-start"}>
+            <IconButton
+              onClick={patchFriend}
+              sx={{
+                backgroundColor: primaryLight,
+                p: "0.75rem",
+                "&:hover": {
+                  backgroundColor: primaryLight,
+                  boxShadow: `0 0px 6px ${palette.primary.light}}`,
+                },
+              }}
+            >
+              {isFriend ? (
+                <PersonRemoveOutlined
+                  sx={{
+                    fontSize: `${isNonMobileScreens ? "18px" : "22px"}`,
+                    color: primaryDark,
+                  }}
+                />
+              ) : (
+                <PersonAddOutlined
+                  sx={{
+                    color: primaryDark,
+                  }}
+                />
+              )}
+            </IconButton>
+          </Box>
+        )}
+      </Box>
+    </>
   );
 };
 

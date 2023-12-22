@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import WidgetWrapper from "src/components/styled/WidgetWrapper";
 import ListFriend from "src/components/styled/ListFriend";
@@ -31,23 +31,34 @@ const FriendListing = ({ userId }) => {
   return (
     <WidgetWrapper>
       <Typography
-        variant="h5"
+        variant="h3"
         color={palette.neutral.dark}
         fontWeight={"500"}
-        sx={{ mb: "1.5rem" }}
+        sx={{ mb: "2.5rem" }}
       >
         Friends List
       </Typography>
 
-      <Box display={"flex"} flexDirection={"column"} gap={"1.5rem"}>
+      <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
         {friends ? (
-          friends.map((friend) => (
-            <ListFriend
+          friends.map((friend, index) => (
+            <Box
               key={friend._id}
-              friendId={friend._id}
-              name={`${friend.firstName} ${friend.lastName}`}
-              userPicturePath={friend.picturePath}
-            />
+              display={"flex"}
+              flexDirection={"column"}
+              gap={"0.5rem"}
+            >
+              <ListFriend
+                friendId={friend._id}
+                name={`${friend.firstName} ${friend.lastName}`}
+                userPicturePath={friend.picturePath}
+              />
+              {index < friends.length - 1 && (
+                <Divider
+                  sx={{ my: "0.5rem", width: "60%", alignSelf: "center" }}
+                />
+              )}
+            </Box>
           ))
         ) : (
           <Box>No friends</Box>

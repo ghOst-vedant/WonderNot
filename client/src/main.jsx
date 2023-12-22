@@ -29,6 +29,7 @@ const store = configureStore({
       },
     });
   },
+  devTools: import.meta.env.VITE_NODE_ENV !== "production",
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
