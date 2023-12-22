@@ -21,7 +21,7 @@
 <a href="https://expressjs.com/">![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)</a>
 <a href="https://nodejs.org/en">![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)</a>
 [![Netlify
-Status](https://api.netlify.com/api/v1/badges/412b29f6-cd62-48bd-ab9b-9a566c7837bb/deploy-status)](https://app.netlify.com/sites/wondernot/deploys)
+Status](https://api.netlify.com/api/v1/badges/412b29f6-cd62-48bd-ab9b-9a566c7837bb/deploy-status)]([https://app.netlify.com/sites/wondernot/deploys](https://wondernot.netlify.app/home))
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
