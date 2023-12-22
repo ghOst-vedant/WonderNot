@@ -5,7 +5,7 @@
 
 <h2>Overview of Project</h2>
 
-<p align="center">   The goal of this project is to provide users a platform where they can interacte and connect to the experienced professionals and gain insights. Equipped with one-to-one interaction feeds and many more...
+<p align="center">  The goal of this project is to provide users a platform where they can interacte and connect with each other. Equipped with one-to-one interaction, feeds and many more...
 </p>
 
 <!--  .............................................................................................................................................  -->
@@ -29,7 +29,60 @@
 
 ## Screenshots of Website
 
-Soon.......
+
+**Large Screens** 💻
+<table class="tg">
+<tbody>
+  <tr>
+    <td class="tg-0lax">Login / Register</td>
+    <td class="tg-0lax"><img width="720" alt="Screenshot 2023-12-23 at 04 06 13" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/831dcad5-f297-452f-b3cf-1c1a31e0c477"></td>
+    <td class="tg-0lax"><img width="718" alt="Screenshot 2023-12-23 at 04 18 43" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/ab2a6806-993e-4a85-ba33-cb34c560cd5d">
+
+</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Home page (Light and Dark Mode)</td>
+    <td class="tg-0lax"><img width="720" alt="Screenshot 2023-12-23 at 04 07 31" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/85992dcf-b476-4939-8af2-46241fd1528c">
+</td>
+    <td class="tg-0lax"><img width="717" alt="Screenshot 2023-12-23 at 04 06 54" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/fd5d7628-742c-4395-80e2-07ef3a8dce70"></td>
+  </tr>
+
+  <tr>
+    <td class="tg-0lax">Profile page (Light and Dark Mode)</td>
+    <td class="tg-0lax"><img width="721" alt="Screenshot 2023-12-23 at 04 07 21" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/fc513c9f-8ab7-4630-abe0-89a0df14bbd8">
+</td>
+    <td class="tg-0lax"><img width="717" alt="Screenshot 2023-12-23 at 04 07 09" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/f9b903b9-3b02-41f9-82db-19ed816046a6"></td>
+
+  </tr>
+</tbody>
+</table>
+
+
+**Mobile Devices** 📱
+<table class="tg">
+<tbody>
+  <tr>
+    <td class="tg-0lax">Login / Register</td>
+    <td class="tg-0lax"><img width="720" alt="Screenshot 2023-12-23 at 04 06 13" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/020ca2e8-aa51-428f-b7d6-8014b9f07ad1"></td>
+    <td class="tg-0lax"><img width="720" alt="Screenshot 2023-12-23 at 04 06 13" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/fd3ca8c2-110b-4c05-b039-c73829b51f4b"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Home page (Light and Dark Mode)</td>
+    <td class="tg-0lax"><img width="720" alt="Screenshot 2023-12-23 at 04 07 31" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/899e71a3-d0eb-413a-b5ef-0ba13268f475">
+</td>
+<td class="tg-0lax"><img width="717" alt="Screenshot 2023-12-23 at 04 06 54" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/afb65c7e-1baf-4167-8ee0-c45fad69bb55"></td>
+<td class="tg-0lax"><h5>Feed</h5> <img width="717" alt="Screenshot 2023-12-23 at 04 06 54" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/0f536bc1-6893-4d8a-a8b4-0ed1940d6398"></td>
+</tr>
+  <tr>
+    <td class="tg-0lax">Profile page (Light and Dark Mode)</td>
+    <td class="tg-0lax"><img width="721" alt="Screenshot 2023-12-23 at 04 07 21" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/90a01b9d-43b3-4595-866f-2ca14453fd7f">
+</td>
+    <td class="tg-0lax"><img width="717" alt="Screenshot 2023-12-23 at 04 07 09" src="https://github.com/ghOst-vedant/WonderNot/assets/71282147/7084fc93-de06-4a76-b2d4-1fcecacec320"></td>
+
+  </tr>
+
+</tbody>
+</table>
 
 <h2 >To Work</h2>
 - Fork the repo to your Github.<br/>
@@ -84,6 +137,7 @@ Soon.......
 ```
 cd WonderNot
 cd client
+**Check for the backend-endpoints**
 npm install
 npm run dev
 ```
