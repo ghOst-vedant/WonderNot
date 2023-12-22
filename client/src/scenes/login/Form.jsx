@@ -18,7 +18,8 @@ import { setLogin } from "src/redux";
 import Dropzone from "react-dropzone";
 import FlexBetween from "src/components/styled/FlexBetween";
 import toast from "react-hot-toast";
-
+import login from "../.././../public/assets/login.svg";
+import signup from "../.././../public/assets/signup.svg";
 const Form = () => {
   const [pageType, setPageType] = useState("login");
   const [register, setRegister] = useState({
@@ -33,7 +34,7 @@ const Form = () => {
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isNonMobile = useMediaQuery("(min-width:600px)");
+  const isNonMobile = useMediaQuery("(min-width:1000px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
@@ -126,189 +127,453 @@ const Form = () => {
   return (
     <>
       <form onSubmit={isLogin ? loginSubmit : registerSubmit}>
-        <Box
-          display={"flex"}
-          flexWrap={"wrap"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          gap={4}
-          flexDirection={"column"}
-          width={"90%"}
-          margin={"auto"}
-        >
-          {isRegister && (
-            <>
+        {isNonMobile ? (
+          <Box display={"flex"} width={"100%"} margin={"auto"}>
+            {isLogin ? (
+              <Box
+                width={"60%"}
+                p={"1rem"}
+                display={"flex"}
+                justifyContent={"center"}
+                margin={"auto"}
+                mt={"5rem"}
+              >
+                {isLogin ? (
+                  <img
+                    src={login}
+                    alt="login illustration"
+                    style={{ width: "100%" }}
+                  />
+                ) : (
+                  <img
+                    src={signup}
+                    alt="signup illustration"
+                    style={{ width: "100%" }}
+                  />
+                )}
+              </Box>
+            ) : (
+              <Box width={"60%"} p={"2rem"} mt={"3rem"}>
+                {isLogin ? (
+                  <img
+                    src={login}
+                    alt="login illustration"
+                    style={{ width: "100%" }}
+                  />
+                ) : (
+                  <img
+                    src={signup}
+                    alt="signup illustration"
+                    style={{ width: "100%" }}
+                  />
+                )}
+              </Box>
+            )}
+            <Box
+              // border={"2px solid red"}
+              display={"flex"}
+              flexWrap={"wrap"}
+              gap={2}
+              flexDirection={"column"}
+              width={"60%"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              margin={"auto"}
+            >
+              {isRegister && (
+                <>
+                  <Box
+                    display={"flex"}
+                    flexDirection={isNonMobile ? "row" : "column"}
+                    gap={4}
+                    width={"100%"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <TextField
+                      fullWidth
+                      label="First name"
+                      value={register.firstName}
+                      onChange={(e) => {
+                        setRegister({ ...register, firstName: e.target.value });
+                      }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Last name"
+                      value={register.lastName}
+                      onChange={(e) => {
+                        setRegister({ ...register, lastName: e.target.value });
+                      }}
+                    />
+                  </Box>
+                  <Box
+                    display={"flex"}
+                    flexDirection={isNonMobile ? "row" : "column"}
+                    gap={4}
+                    width={"100%"}
+                  >
+                    <TextField
+                      fullWidth
+                      label="Location"
+                      value={register.location}
+                      onChange={(e) => {
+                        setRegister({ ...register, location: e.target.value });
+                      }}
+                    />
+                    <Box width={isNonMobile ? "100%" : "100%"}>
+                      <TextField
+                        fullWidth
+                        label="Add Skill"
+                        value={newSkill}
+                        onChange={(e) => setNewSkill(e.target.value)}
+                        InputProps={{
+                          endAdornment: (
+                            <IconButton onClick={handleSkillAdd}>
+                              <AddIcon />
+                            </IconButton>
+                          ),
+                        }}
+                      />
+                      <Box>
+                        {register.skills.map((skill, index) => (
+                          <Chip
+                            required
+                            key={index}
+                            label={skill}
+                            onDelete={() => handleSkillDelete(skill)}
+                            style={{ margin: "4px" }}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    width={"100%"}
+                    border={`1px solid ${palette.neutral.medium}`}
+                    borderRadius={"1rem"}
+                    p={"0.75rem"}
+                  >
+                    <Dropzone
+                      multiple={false}
+                      onDrop={(acceptedFile) => {
+                        setRegister({ ...register, picture: acceptedFile[0] });
+                      }}
+                    >
+                      {({ getRootProps, getInputProps }) => (
+                        <Box
+                          {...getRootProps()}
+                          border={`1px dashed ${palette.primary.main}`}
+                          borderRadius={"0.5rem"}
+                          p={"0.25rem 0.5rem "}
+                          sx={{ "&:hover": { cursor: "pointer" } }}
+                        >
+                          <input {...getInputProps()} />
+                          {!register.picture ? (
+                            <p>Add picture</p>
+                          ) : (
+                            <FlexBetween p={"0.5rem 0.5rem "}>
+                              <Typography>{register.picture.name}</Typography>
+                              <EditOutlinedIcon />
+                            </FlexBetween>
+                          )}
+                        </Box>
+                      )}
+                    </Dropzone>
+                  </Box>
+                </>
+              )}
+              {isLogin ? (
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  gap={4}
+                  width={"70%"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  mt={"4rem"}
+                >
+                  <TextField
+                    label="Email"
+                    value={register.email}
+                    onChange={(e) => {
+                      setRegister({ ...register, email: e.target.value });
+                    }}
+                    name="email"
+                    fullWidth
+                  />
+                  <TextField
+                    label="Password"
+                    type="password"
+                    value={register.password}
+                    onChange={(e) => {
+                      setRegister({ ...register, password: e.target.value });
+                    }}
+                    name="password"
+                    fullWidth
+                  />
+                </Box>
+              ) : (
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  gap={4}
+                  width={"100%"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
+                  <TextField
+                    label="Email"
+                    value={register.email}
+                    onChange={(e) => {
+                      setRegister({ ...register, email: e.target.value });
+                    }}
+                    name="email"
+                    fullWidth
+                  />
+                  <TextField
+                    label="Password"
+                    type="password"
+                    value={register.password}
+                    onChange={(e) => {
+                      setRegister({ ...register, password: e.target.value });
+                    }}
+                    name="password"
+                    fullWidth
+                  />
+                </Box>
+              )}
               <Box
                 display={"flex"}
-                flexDirection={isNonMobile ? "row" : "column"}
+                flexDirection={"column"}
+                alignItems={"center"}
+                gap={1}
+                justifyContent={"center"}
+                width={"80%"}
+              >
+                <Button
+                  type="submit"
+                  sx={{
+                    fontSize: "1rem",
+                    m: "1rem 0",
+                    p: "0.5rem 5rem",
+                    borderRadius: "1rem",
+                    bgcolor: palette.primary.main,
+                    color: palette.background.alt,
+                    "&:hover": { color: palette.primary.main },
+                  }}
+                >
+                  {isLogin ? "login" : "register"}
+                </Button>
+                <Typography
+                  onClick={() => {
+                    setPageType(isLogin ? "register" : "login");
+                  }}
+                  sx={{
+                    textDecoration: "underline",
+                    mb: "1rem",
+                    color: palette.primary.main,
+                    "&:hover": {
+                      cursor: "pointer",
+                      color: palette.primary.light,
+                    },
+                  }}
+                >
+                  {isLogin
+                    ? "Don't have an account?"
+                    : "Already have an account?"}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        ) : (
+          <>
+            <Box
+              display={"flex"}
+              flexWrap={"wrap"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={4}
+              flexDirection={"column"}
+              width={"100%"}
+            >
+              {isRegister && (
+                <>
+                  <Box
+                    display={"flex"}
+                    flexDirection={isNonMobile ? "row" : "column"}
+                    gap={4}
+                    width={"100%"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <TextField
+                      fullWidth
+                      label="First name"
+                      value={register.firstName}
+                      onChange={(e) => {
+                        setRegister({ ...register, firstName: e.target.value });
+                      }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Last name"
+                      value={register.lastName}
+                      onChange={(e) => {
+                        setRegister({ ...register, lastName: e.target.value });
+                      }}
+                    />
+                  </Box>
+                  <Box
+                    display={"flex"}
+                    flexDirection={isNonMobile ? "row" : "column"}
+                    gap={4}
+                    width={isNonMobile ? "50%" : "100%"}
+                  >
+                    <TextField
+                      fullWidth
+                      label="Location"
+                      value={register.location}
+                      onChange={(e) => {
+                        setRegister({ ...register, location: e.target.value });
+                      }}
+                    />
+                    <Box width={isNonMobile ? "70%" : "100%"}>
+                      <TextField
+                        fullWidth
+                        label="Add Skill"
+                        value={newSkill}
+                        onChange={(e) => setNewSkill(e.target.value)}
+                        InputProps={{
+                          endAdornment: (
+                            <IconButton onClick={handleSkillAdd}>
+                              <AddIcon />
+                            </IconButton>
+                          ),
+                        }}
+                      />
+                      <Box>
+                        {register.skills.map((skill, index) => (
+                          <Chip
+                            required
+                            key={index}
+                            label={skill}
+                            onDelete={() => handleSkillDelete(skill)}
+                            style={{ margin: "4px" }}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    width={isNonMobile ? "50%" : "100%"}
+                    border={`1px solid ${palette.neutral.medium}`}
+                    borderRadius={"1rem"}
+                    p={"0.75rem"}
+                  >
+                    <Dropzone
+                      multiple={false}
+                      onDrop={(acceptedFile) => {
+                        setRegister({ ...register, picture: acceptedFile[0] });
+                      }}
+                    >
+                      {({ getRootProps, getInputProps }) => (
+                        <Box
+                          {...getRootProps()}
+                          border={`1px dashed ${palette.primary.main}`}
+                          borderRadius={"0.5rem"}
+                          p={"0.25rem 0.5rem "}
+                          sx={{ "&:hover": { cursor: "pointer" } }}
+                        >
+                          <input {...getInputProps()} />
+                          {!register.picture ? (
+                            <p>Add picture</p>
+                          ) : (
+                            <FlexBetween p={"0.5rem 0.5rem "}>
+                              <Typography>{register.picture.name}</Typography>
+                              <EditOutlinedIcon />
+                            </FlexBetween>
+                          )}
+                        </Box>
+                      )}
+                    </Dropzone>
+                  </Box>
+                </>
+              )}
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
                 gap={4}
                 width={isNonMobile ? "50%" : "100%"}
                 justifyContent={"center"}
                 alignItems={"center"}
               >
                 <TextField
-                  fullWidth
-                  label="First name"
-                  value={register.firstName}
+                  label="Email"
+                  value={register.email}
                   onChange={(e) => {
-                    setRegister({ ...register, firstName: e.target.value });
+                    setRegister({ ...register, email: e.target.value });
                   }}
+                  name="email"
+                  fullWidth
                 />
                 <TextField
-                  fullWidth
-                  label="Last name"
-                  value={register.lastName}
+                  label="Password"
+                  type="password"
+                  value={register.password}
                   onChange={(e) => {
-                    setRegister({ ...register, lastName: e.target.value });
+                    setRegister({ ...register, password: e.target.value });
                   }}
+                  name="password"
+                  fullWidth
                 />
               </Box>
-              <Box
-                display={"flex"}
-                flexDirection={isNonMobile ? "row" : "column"}
-                gap={4}
-                width={isNonMobile ? "50%" : "100%"}
+            </Box>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              alignItems={"center"}
+              gap={1}
+              justifyContent={"center"}
+              m={"auto"}
+              mt={2}
+              width={isNonMobile ? "40%" : "80%"}
+            >
+              <Button
+                type="submit"
+                sx={{
+                  fontSize: "1rem",
+                  m: "1rem 0",
+                  p: "0.5rem 5rem",
+                  borderRadius: "1rem",
+                  bgcolor: palette.primary.main,
+                  color: palette.background.alt,
+                  "&:hover": { color: palette.primary.main },
+                }}
               >
-                <TextField
-                  fullWidth
-                  label="Location"
-                  value={register.location}
-                  onChange={(e) => {
-                    setRegister({ ...register, location: e.target.value });
-                  }}
-                />
-                <Box width={isNonMobile ? "70%" : "100%"}>
-                  <TextField
-                    fullWidth
-                    label="Add Skill"
-                    value={newSkill}
-                    onChange={(e) => setNewSkill(e.target.value)}
-                    InputProps={{
-                      endAdornment: (
-                        <IconButton onClick={handleSkillAdd}>
-                          <AddIcon />
-                        </IconButton>
-                      ),
-                    }}
-                  />
-                  <Box>
-                    {register.skills.map((skill, index) => (
-                      <Chip
-                        required
-                        key={index}
-                        label={skill}
-                        onDelete={() => handleSkillDelete(skill)}
-                        style={{ margin: "4px" }}
-                      />
-                    ))}
-                  </Box>
-                </Box>
-              </Box>
-              <Box
-                width={isNonMobile ? "50%" : "100%"}
-                border={`1px solid ${palette.neutral.medium}`}
-                borderRadius={"1rem"}
-                p={"0.75rem"}
+                {isLogin ? "login" : "register"}
+              </Button>
+              <Typography
+                onClick={() => {
+                  setPageType(isLogin ? "register" : "login");
+                }}
+                sx={{
+                  textDecoration: "underline",
+                  mb: "1rem",
+                  color: palette.primary.main,
+                  "&:hover": {
+                    cursor: "pointer",
+                    color: palette.primary.light,
+                  },
+                }}
               >
-                <Dropzone
-                  multiple={false}
-                  onDrop={(acceptedFile) => {
-                    setRegister({ ...register, picture: acceptedFile[0] });
-                  }}
-                >
-                  {({ getRootProps, getInputProps }) => (
-                    <Box
-                      {...getRootProps()}
-                      border={`1px dashed ${palette.primary.main}`}
-                      borderRadius={"0.5rem"}
-                      p={"0.25rem 0.5rem "}
-                      sx={{ "&:hover": { cursor: "pointer" } }}
-                    >
-                      <input {...getInputProps()} />
-                      {!register.picture ? (
-                        <p>Add picture</p>
-                      ) : (
-                        <FlexBetween p={"0.5rem 0.5rem "}>
-                          <Typography>{register.picture.name}</Typography>
-                          <EditOutlinedIcon />
-                        </FlexBetween>
-                      )}
-                    </Box>
-                  )}
-                </Dropzone>
-              </Box>
-            </>
-          )}
-          <Box
-            display={"flex"}
-            flexDirection={"column"}
-            gap={4}
-            width={isNonMobile ? "50%" : "100%"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <TextField
-              label="Email"
-              value={register.email}
-              onChange={(e) => {
-                setRegister({ ...register, email: e.target.value });
-              }}
-              name="email"
-              fullWidth
-            />
-            <TextField
-              label="Password"
-              type="password"
-              value={register.password}
-              onChange={(e) => {
-                setRegister({ ...register, password: e.target.value });
-              }}
-              name="password"
-              fullWidth
-            />
-          </Box>
-        </Box>
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"center"}
-          gap={1}
-          justifyContent={"center"}
-          m={"auto"}
-          mt={2}
-          width={isNonMobile ? "40%" : "80%"}
-        >
-          <Button
-            type="submit"
-            sx={{
-              fontSize: "1rem",
-              m: "1rem 0",
-              p: "0.5rem 5rem",
-              borderRadius: "1rem",
-              bgcolor: palette.primary.main,
-              color: palette.background.alt,
-              "&:hover": { color: palette.primary.main },
-            }}
-          >
-            {isLogin ? "login" : "register"}
-          </Button>
-          <Typography
-            onClick={() => {
-              setPageType(isLogin ? "register" : "login");
-            }}
-            sx={{
-              textDecoration: "underline",
-              mb: "1rem",
-              color: palette.primary.main,
-              "&:hover": {
-                cursor: "pointer",
-                color: palette.primary.light,
-              },
-            }}
-          >
-            {isLogin ? "Don't have an account?" : "Already have an account?"}
-          </Typography>
-        </Box>
+                {isLogin
+                  ? "Don't have an account?"
+                  : "Already have an account?"}
+              </Typography>
+            </Box>
+          </>
+        )}
       </form>
     </>
   );

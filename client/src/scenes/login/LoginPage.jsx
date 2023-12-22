@@ -39,7 +39,20 @@ const LoginPage = () => {
           Welcome to WonderNot
         </Typography>
       </Box>
-      <Form />
+      {isNonMobileScreens ? (
+        <Box width={"80%"} display={"flex"} margin={"auto"}>
+          <Form />
+        </Box>
+      ) : (
+        <Box
+          width={"85%"}
+          flexBasis={"1"}
+          alignItems={"center"}
+          margin={"auto"}
+        >
+          <Form />
+        </Box>
+      )}
     </Box>
   );
 };
