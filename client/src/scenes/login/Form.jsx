@@ -60,16 +60,26 @@ const Form = () => {
   // Login Handler
   const loginSubmit = async (event) => {
     event.preventDefault();
+
     const { email, password } = register;
+
+    // Display a loading toast while the request is pending
+    const loadingToastId = toast("Logging in...", { autoClose: false });
+
     try {
       const { data } = await axios.post("auth/login", {
         email,
         password,
       });
+
       if (data.error) {
         toast.error(data.error);
       } else {
+        // Dismiss the loading toast
+        toast.dismiss(loadingToastId);
+        // Display a success toast
         toast.success("Login Successful");
+
         setRegister({
           email: "",
           password: "",
@@ -82,13 +92,18 @@ const Form = () => {
         );
         navigate("/home");
       }
-    } catch (error) {}
+    } catch (error) {
+      // Dismiss the loading toast on error
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
   };
 
   // Register Handler
 
   const registerSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append("firstName", register.firstName);
     formData.append("lastName", register.lastName);
@@ -99,16 +114,22 @@ const Form = () => {
       formData.append(`skills[${index}]`, skill);
     });
     formData.append("picture", register.picture);
+
+    // Display a loading toast
+    const loadingToastId = toast("Registering...", { autoClose: false });
+
     try {
       const { data } = await axios.post("auth/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+
       if (data.error) {
         toast.error(data.error);
       } else {
-        toast.success("Account Created Successfull");
+        toast.dismiss(loadingToastId); // Dismiss the loading toast and display the success
+        toast.success("Account Created Successfully");
         setRegister({
           firstName: "",
           lastName: "",
@@ -121,9 +142,11 @@ const Form = () => {
         setPageType("login");
       }
     } catch (error) {
-      console.log(error);
+      toast.dismiss(loadingToastId); // Dismiss the loading toast on error
+      console.error(error);
     }
   };
+
   return (
     <>
       <form onSubmit={isLogin ? loginSubmit : registerSubmit}>

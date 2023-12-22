@@ -40,12 +40,11 @@ const ProfilePage = () => {
         gap={"5rem"}
       >
         <Box
-          // flexBasis={isNonMobileScreens ? "25%" : undefined}
           width={isNonMobileScreens ? "31%" : undefined}
           display={"flex"}
           flexDirection={"column"}
           justifyContent={"flex-start"}
-          gap={"0rem"}
+          gap={isNonMobileScreens ? "0rem" : "2rem"}
         >
           <UserWidget userId={userId} picturePath={user.picturePath} />
           <Box m={isNonMobileScreens ? "2rem" : "0"} ml={"0"}>

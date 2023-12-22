@@ -44,7 +44,7 @@ export const UserWidget = ({ userId, picturePath }) => {
     <>
       <WidgetWrapper>
         <FlexBetween
-          gap="0.5rem"
+          gap="0.75rem"
           pb="1.1rem"
           onClick={() => navigate(`/profile/${userId}`)}
         >
@@ -70,9 +70,14 @@ export const UserWidget = ({ userId, picturePath }) => {
           </FlexBetween>
           <ManageAccountsOutlined />
         </FlexBetween>
-        <Divider />
+        <Divider sx={{ width: "100%" }} />
         {/* Second Row */}
-        <Box p={"1rem 0"}>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          p={"1rem 0"}
+          gap={"0.25rem"}
+        >
           <Box
             display={"flex"}
             gap={"1rem"}
@@ -94,7 +99,7 @@ export const UserWidget = ({ userId, picturePath }) => {
                 Skills:
               </Typography>
             </Box>
-            <Box ml={"0.25rem"} display={"flex"} gap={"0.5rem"} p={"0.5rem"}>
+            <Box ml={"0.25rem"} display={"flex"} gap={"0.5rem"} p={"0.75rem"}>
               {skills.map((skill, index) => (
                 <Chip key={index} label={skill} sx={{ fontSize: "small" }} />
               ))}
