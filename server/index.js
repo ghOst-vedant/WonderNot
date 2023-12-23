@@ -55,16 +55,37 @@ app.use("/posts", postRoutes);
 
 // Database setup
 const PORT = process.env.PORT || 6001;
-mongoose
-  .connect(process.env.MONGO_URL)
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URL);
+    console.log(`MONGODB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+connectDB()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`✅ Server connected to ${PORT}`);
     });
-    // ADD only once
-    // User.insertMany(users);
-    // Post.insertMany(posts);
   })
   .catch((err) => {
-    console.log(`❌ ${err} Failed to connect`);
+    console.log(`❌ Failed to connect: ${err} `);
   });
+
+// mongoose
+//   .connect(process.env.MONGO_URL)
+//   .then(() => {
+//     app.listen(PORT, () => {
+//       console.log(`✅ Server connected to ${PORT}`);
+//     });
+//     // ADD only once
+//     // User.insertMany(users);
+//     // Post.insertMany(posts);
+//   })
+//   .catch((err) => {
+//     console.log(`❌ ${err} Failed to connect`);
+//   });
