@@ -13,7 +13,6 @@ import { themeSettings } from "./theme";
 import axios from "axios";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKENDURL;
-// axios.defaults.withCredentials = true;
 
 const App = () => {
   const mode = useSelector((state) => state.mode);
