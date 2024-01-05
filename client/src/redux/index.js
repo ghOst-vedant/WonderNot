@@ -8,7 +8,7 @@ const initialState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  //   reducers are actions basically function which modify the global state
+  //  reducers are actions basically function which modify the global redux state or the store
   reducers: {
     setMode: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";

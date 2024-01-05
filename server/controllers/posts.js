@@ -5,13 +5,17 @@ import cloudinary from "cloudinary";
 import { log } from "console";
 export const createPost = async (req, res) => {
   try {
-    const { userId, description, picturePath } = req.body;
+    const { userId, description } = req.body;
     const user = await User.findById(userId);
-    const picture = req.file;
-    const fileUri = getDataUri(picture);
-    const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
-      folder: "UserPosts",
-    });
+    let picPath = "";
+    if (req.file) {
+      const picture = req.file;
+      const fileUri = getDataUri(picture);
+      const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
+        folder: "UserPosts",
+      });
+      picPath = myCloud.secure_url;
+    }
     const newPost = new Post({
       userId,
       firstName: user.firstName,
@@ -19,7 +23,7 @@ export const createPost = async (req, res) => {
       location: user.location,
       description,
       userPicturePath: user.picturePath,
-      picturePath: myCloud.secure_url,
+      picturePath: picPath,
       likes: {},
       comments: [],
     });
