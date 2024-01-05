@@ -33,33 +33,35 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   return (
     <>
       {posts &&
-        posts.map(
-          ({
-            _id,
-            userId,
-            firstName,
-            lastName,
-            description,
-            location,
-            likes,
-            comments,
-            picturePath,
-            userPicturePath,
-          }) => (
-            <Post
-              key={_id}
-              postId={_id}
-              postUserId={userId}
-              name={`${firstName} ${lastName}`}
-              description={description}
-              picturePath={picturePath}
-              userPicturePath={userPicturePath}
-              location={location}
-              likes={likes}
-              comments={comments}
-            />
-          )
-        )}
+        posts
+          .toReversed()
+          .map(
+            ({
+              _id,
+              userId,
+              firstName,
+              lastName,
+              description,
+              location,
+              likes,
+              comments,
+              picturePath,
+              userPicturePath,
+            }) => (
+              <Post
+                key={_id}
+                postId={_id}
+                postUserId={userId}
+                name={`${firstName} ${lastName}`}
+                description={description}
+                picturePath={picturePath}
+                userPicturePath={userPicturePath}
+                location={location}
+                likes={likes}
+                comments={comments}
+              />
+            )
+          )}
     </>
   );
 };
