@@ -12,10 +12,12 @@ import cloudinary from "cloudinary";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
+import chatRoute from "./routes/ChatRoute.js";
+import messageRoute from "./routes/message.js";
 // controller import
 import { register } from "./controllers/auth.js";
-import { verifyToken } from "./middleware/auth.js";
 import { createPost } from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
 import { singleUpload } from "./middleware/multer.js";
 
 // CONFIGURATIONS //
@@ -52,7 +54,8 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
-
+app.use("/chat", chatRoute);
+app.use("/message", messageRoute);
 // Database setup
 const PORT = process.env.PORT || 6001;
 

@@ -25,7 +25,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const friendRequest = async (token) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKENDURL}/users/${_id}/${friendId}`,
+        `${import.meta.env.VITE_TEST}/users/${_id}/${friendId}`,
         {
           method: "PATCH",
           headers: {

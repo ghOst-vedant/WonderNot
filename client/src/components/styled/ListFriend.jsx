@@ -33,7 +33,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   const friendRequest = async (token) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKENDURL}/users/${_id}/${friendId}`,
+        `${import.meta.env.VITE_TEST}/users/${_id}/${friendId}`,
         {
           method: "PATCH",
           headers: {
@@ -89,6 +89,9 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
         <FlexBetween gap="0.75rem">
           <UserImage image={userPicturePath} size="60px" />
           <Box
+            display={"flex"}
+            flexDirection={"column"}
+            gap={"0.25rem"}
             alignSelf={"flex-start"}
             onClick={() => {
               navigate(`/profile/${friendId}`);
@@ -113,7 +116,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
 
             {skills && (
               <Box
-                ml={"0.25rem"}
+                // mt={"0.75rem"}
                 display={"flex"}
                 flexWrap={"wrap"}
                 gap={"0.35rem"}

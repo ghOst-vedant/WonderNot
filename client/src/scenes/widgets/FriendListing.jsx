@@ -34,12 +34,17 @@ const FriendListing = ({ userId }) => {
         variant="h3"
         color={palette.neutral.dark}
         fontWeight={"500"}
-        sx={{ mb: "2.5rem" }}
+        sx={{ mb: "2rem" }}
       >
         Friends List
       </Typography>
 
-      <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        gap={"0.5rem"}
+        mb={"0.5rem"}
+      >
         {friends ? (
           friends.map((friend, index) => (
             <Box

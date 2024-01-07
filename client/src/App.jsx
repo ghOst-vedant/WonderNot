@@ -11,8 +11,9 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { themeSettings } from "./theme";
 import axios from "axios";
+import Chat from "./scenes/Chat/Chat";
 
-axios.defaults.baseURL = import.meta.env.VITE_BACKENDURL;
+axios.defaults.baseURL = import.meta.env.VITE_TEST;
 
 const App = () => {
   const mode = useSelector((state) => state.mode);
@@ -33,6 +34,10 @@ const App = () => {
             <Route
               path="/profile/:userId"
               element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/chat"
+              element={isAuth ? <Chat /> : <Navigate to="/" />}
             />
           </Routes>
         </ThemeProvider>
