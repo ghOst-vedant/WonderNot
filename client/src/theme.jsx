@@ -76,7 +76,7 @@ export const themeSettings = (mode) => {
               alt: colorTokens.grey[0],
             },
             green: {
-              main: "#39ff14",
+              main: "#C70039",
             },
           }),
     },

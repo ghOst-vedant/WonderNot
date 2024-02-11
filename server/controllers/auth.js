@@ -8,6 +8,12 @@ export const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password, friends, skills, location } =
       req.body;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.json({
+        error: "Invalid email address.",
+      });
+    }
     if (password.length < 8) {
       return res.json({
         error: "Password must be atleast 8 character in length.",
@@ -44,9 +50,9 @@ export const register = async (req, res) => {
       skills,
     });
     const savedUser = await newUser.save();
+    console.log(savedUser);
     res.status(201).json(savedUser);
   } catch (err) {
-    // res.status(500).json({ error: err.message });
     console.log(err);
   }
 };

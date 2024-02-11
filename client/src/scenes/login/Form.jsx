@@ -9,6 +9,8 @@ import {
   useTheme,
   Chip,
   IconButton,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import AddIcon from "@mui/icons-material/Add";
@@ -37,7 +39,6 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:1000px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
-
   const [newSkill, setNewSkill] = useState([]);
 
   const handleSkillAdd = () => {
@@ -116,7 +117,7 @@ const Form = () => {
     formData.append("picture", register.picture);
 
     // Display a loading toast
-    const loadingToastId = toast("Registering...", { autoClose: false });
+    const loadingToastId = toast("Registering...", { autoClose: true });
 
     try {
       const { data } = await axios.post("auth/register", formData, {
@@ -127,6 +128,7 @@ const Form = () => {
 
       if (data.error) {
         toast.error(data.error);
+        toast.dismiss(loadingToastId);
       } else {
         toast.dismiss(loadingToastId); // Dismiss the loading toast and display the success
         toast.success("Account Created Successfully");
@@ -273,6 +275,39 @@ const Form = () => {
                   </Box>
                   <Box
                     width={"100%"}
+                    borderRadius={"1rem"}
+                    p={"0.75rem"}
+                    fontSize={"2rem"}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={"1rem"}
+                  >
+                    <Typography variant="h5">Join as a!!!</Typography>
+                    <FormControlLabel
+                      label="Mentor"
+                      control={
+                        <Checkbox
+                          checked={register.isA === "Mentor"}
+                          onChange={() => {
+                            setRegister({ ...register, isA: "Mentor" });
+                          }}
+                        />
+                      }
+                    />
+                    <FormControlLabel
+                      label="Learner"
+                      control={
+                        <Checkbox
+                          checked={register.isA === "Learner"}
+                          onChange={() => {
+                            setRegister({ ...register, isA: "Learner" });
+                          }}
+                        />
+                      }
+                    />
+                  </Box>
+                  <Box
+                    width={"100%"}
                     border={`1px solid ${palette.neutral.medium}`}
                     borderRadius={"1rem"}
                     p={"0.75rem"}
@@ -317,6 +352,7 @@ const Form = () => {
                   mt={"4rem"}
                 >
                   <TextField
+                    type="email"
                     label="Email"
                     value={register.email}
                     onChange={(e) => {

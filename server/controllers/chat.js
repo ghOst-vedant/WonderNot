@@ -1,6 +1,15 @@
 import Chats from "../models/Chats.js";
 
 export const createChat = async (req, res) => {
+  const existingChat = await Chats.findOne({
+    members: { $all: [req.body.senderId, req.body.receiverId] },
+  });
+  if (existingChat) {
+    return res
+      .status(400)
+      .json({ error: "Chat with these members already exists" });
+  }
+
   const newChat = new Chats({
     members: [req.body.senderId, req.body.receiverId],
   });

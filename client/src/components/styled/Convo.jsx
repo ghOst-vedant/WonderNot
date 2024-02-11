@@ -1,15 +1,13 @@
-import { Badge, Box, Typography, useTheme } from "@mui/material";
+import { Badge, Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setChats } from "src/redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 const Convo = ({ data, currentUserId, online }) => {
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { palette } = useTheme();
-  const dispatch = useDispatch();
-  const dark = palette.neutral.dark;
-  const medium = palette.neutral.medium;
+
   const main = palette.neutral.main;
   const token = useSelector((state) => state.token);
   const [userData, setUserData] = useState(null);
@@ -24,7 +22,7 @@ const Convo = ({ data, currentUserId, online }) => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [data]);
   return (
     <Box
       padding={"0.5rem 0rem"}
@@ -37,21 +35,22 @@ const Convo = ({ data, currentUserId, online }) => {
         },
       }}
     >
-      <Badge variant="dot" color="green">
-        <FlexBetween>
-          <FlexBetween gap="1rem">
-            <UserImage image={userData?.picturePath} size="55px" />
-            <Box>
-              <Typography color={main} variant="h5" fontWeight="500">
-                {userData?.firstName} {userData?.lastName}
-              </Typography>
-              <Typography color={medium} fontSize="0.75rem">
-                Online
-              </Typography>
+      <FlexBetween>
+        <FlexBetween gap="1rem">
+          <UserImage
+            image={userData?.picturePath}
+            size={isNonMobileScreens ? "55px" : "45px"}
+          />
+          <Box>
+            <Typography color={main} variant="h5" fontWeight="500">
+              {userData?.firstName} {userData?.lastName}
+            </Typography>
+            <Box color={"greenyellow"} fontSize="0.75rem">
+              {online && <Typography fontSize={"0.7rem"}>Online</Typography>}
             </Box>
-          </FlexBetween>
+          </Box>
         </FlexBetween>
-      </Badge>
+      </FlexBetween>
     </Box>
   );
 };

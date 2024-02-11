@@ -6,9 +6,11 @@ import { UserWidget } from "../widgets/UserWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import FriendListing from "../widgets/FriendListing";
+import Mentor from "../widgets/Mentor";
 
 const HomePage = () => {
-  const { _id, picturePath } = useSelector((state) => state.user);
+  const { _id, picturePath, isA } = useSelector((state) => state.user);
+  console.log(isA);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   return (
     <Box>
@@ -20,8 +22,14 @@ const HomePage = () => {
         gap={"1.5rem"}
         justifyContent={"space-between"}
       >
-        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+        <Box
+          flexBasis={isNonMobileScreens ? "26%" : undefined}
+          gap={"2rem"}
+          display={"flex"}
+          flexDirection={"column"}
+        >
           <UserWidget userId={_id} picturePath={picturePath} />
+          {!isA && <Mentor />}
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}

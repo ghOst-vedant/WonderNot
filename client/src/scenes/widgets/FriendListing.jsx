@@ -18,7 +18,6 @@ const FriendListing = ({ userId }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const data = response.data;
       dispatch(setFriends({ friends: data }));
     } catch (error) {
@@ -45,10 +44,10 @@ const FriendListing = ({ userId }) => {
         gap={"0.5rem"}
         mb={"0.5rem"}
       >
-        {friends ? (
-          friends.map((friend, index) => (
+        {Array.isArray(friends) && friends.length > 0 ? (
+          friends?.map((friend, index) => (
             <Box
-              key={friend._id}
+              key={index}
               display={"flex"}
               flexDirection={"column"}
               gap={"0.5rem"}

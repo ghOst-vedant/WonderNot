@@ -4,7 +4,6 @@ const initialState = {
   user: null,
   token: null,
   posts: [],
-  chats: [],
 };
 export const authSlice = createSlice({
   name: "auth",
@@ -39,9 +38,6 @@ export const authSlice = createSlice({
         return post;
       });
       state.posts = updatedPosts;
-    },
-    setChats: (state, action) => {
-      state.chats = action.payload.chats;
     },
   },
 });

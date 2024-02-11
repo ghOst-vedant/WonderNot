@@ -1,10 +1,12 @@
 import {
-  ManageAccountsOutlined,
-  EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
+  Person,
+  School,
+  Stars,
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme, Chip } from "@mui/material";
+
 import UserImage from "components/styled/UserImage";
 import FlexBetween from "components/styled/FlexBetween";
 import WidgetWrapper from "components/styled/WidgetWrapper";
@@ -38,7 +40,16 @@ export const UserWidget = ({ userId, picturePath }) => {
     return null;
   }
 
-  const { firstName, lastName, skills, friends, location } = user;
+  const {
+    firstName,
+    lastName,
+    skills,
+    friends,
+    location,
+    rating,
+    isA,
+    mentorSkills,
+  } = user;
 
   return (
     <>
@@ -68,7 +79,6 @@ export const UserWidget = ({ userId, picturePath }) => {
               <Typography color={medium}>{friends.length} friends</Typography>
             </Box>
           </FlexBetween>
-          <ManageAccountsOutlined />
         </FlexBetween>
         <Divider sx={{ width: "100%" }} />
         {/* Second Row */}
@@ -91,6 +101,20 @@ export const UserWidget = ({ userId, picturePath }) => {
               {location}{" "}
             </Typography>
           </Box>
+          <Box
+            display={"flex"}
+            gap={"1rem"}
+            alignItems={"center"}
+            justifyItems={"baseline"}
+            mb={"0.5rem"}
+          >
+            {isA && <School fontSize={"medium"} sx={{ color: main }} />}
+
+            <Typography color={medium} fontSize={"medium"}>
+              {" "}
+              {isA}{" "}
+            </Typography>
+          </Box>
           {/* SKills part */}
           <Box display={"flex"} flexDirection={"column"}>
             <Box display={"flex"} gap={"1rem"} alignItems={"center"}>
@@ -105,7 +129,50 @@ export const UserWidget = ({ userId, picturePath }) => {
               ))}
             </Box>
           </Box>
+          {isA && (
+            <>
+              <Box
+                display={"flex"}
+                gap={"1rem"}
+                alignItems={"center"}
+                justifyItems={"baseline"}
+                mb={"0.5rem"}
+              >
+                <Stars fontSize={"medium"} sx={{ color: main }} />
+                <Typography color={medium} fontSize={"medium"}>
+                  {rating}
+                </Typography>
+              </Box>
+              <Box display={"flex"} flexDirection={"column"}>
+                <Box display={"flex"} gap={"1rem"} alignItems={"center"}>
+                  <WorkOutlineOutlined
+                    fontSize={"medium"}
+                    sx={{ color: main }}
+                  />
+                  <Typography color={medium} fontSize={"medium"}>
+                    {" "}
+                    Available for Mentoring:
+                  </Typography>
+                </Box>
+                <Box
+                  ml={"0.25rem"}
+                  display={"flex"}
+                  gap={"0.5rem"}
+                  p={"0.75rem"}
+                >
+                  {mentorSkills.map((skill, index) => (
+                    <Chip
+                      key={index}
+                      label={skill}
+                      sx={{ fontSize: "small" }}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            </>
+          )}
         </Box>
+        <Box></Box>
       </WidgetWrapper>
     </>
   );

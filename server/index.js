@@ -19,7 +19,8 @@ import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import { singleUpload } from "./middleware/multer.js";
-
+import http from "http";
+import { Server as socketIoServer } from "socket.io";
 // CONFIGURATIONS //
 
 const __filename = fileURLToPath(import.meta.url);
@@ -62,7 +63,7 @@ const PORT = process.env.PORT || 6001;
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URL);
-    console.log(`MONGODB Connected: ${conn.connection.host}`);
+    console.log(`✅ MONGODB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
     process.exit(1);
@@ -79,16 +80,45 @@ connectDB()
     console.log(`❌ Failed to connect: ${err} `);
   });
 
-// mongoose
-//   .connect(process.env.MONGO_URL)
-//   .then(() => {
-//     app.listen(PORT, () => {
-//       console.log(`✅ Server connected to ${PORT}`);
-//     });
-//     // ADD only once
-//     // User.insertMany(users);
-//     // Post.insertMany(posts);
-//   })
-//   .catch((err) => {
-//     console.log(`❌ ${err} Failed to connect`);
-//   });
+const server = http.createServer(app);
+
+const io = new socketIoServer(server, {
+  cors: {
+    origin: "*",
+    methods: ["*"],
+  },
+});
+
+let activeUsers = [];
+
+io.on("connection", (socket) => {
+  //Add new User
+  socket.on("new-user-add", (newUserId) => {
+    if (!activeUsers.some((user) => user.userId === newUserId)) {
+      activeUsers.push({ userId: newUserId, socketId: socket.id });
+      console.log("New User Connected", activeUsers);
+    }
+    io.emit("get-users", activeUsers);
+  });
+
+  socket.on("disconnect", () => {
+    activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
+    console.log("userDisconnected ", activeUsers);
+    io.emit("get-users", activeUsers);
+  });
+
+  socket.on("send-message", (data) => {
+    const { receiverId } = data;
+    const user = activeUsers.find((user) => user.userId === receiverId);
+    console.log("sending from socket to receiver", receiverId);
+    console.log("data", data);
+    if (user) {
+      io.to(user.socketId).emit("receive-message", data);
+    }
+  });
+});
+const SOCKET_SERVER = process.env.SOCKET_SERVER;
+
+server.listen(SOCKET_SERVER, () => {
+  console.log(`✅ Socket Working.....`);
+});

@@ -53,12 +53,55 @@ export const addRemoveFriend = async (req, res) => {
     );
     const formattedFriends = friends.map(
       ({ _id, firstName, lastName, occupation, location, picturePath }) => {
-        return { _id, firstName, lastName, occupation, location, picturePath };
+        return {
+          _id,
+          firstName,
+          lastName,
+          occupation,
+          location,
+          picturePath,
+        };
       }
     );
 
     res.status(200).json(formattedFriends);
   } catch (err) {
     res.status(404).json({ message: err.message });
+  }
+};
+
+// Search
+export const searchUser = async (req, res) => {
+  try {
+    // Get search criteria from query parameters
+    const { keyword } = req.query;
+
+    // Perform a case-insensitive search for users based on name and skills
+    const users = await User.find({
+      $or: [
+        { firstName: { $regex: new RegExp(keyword, "i") } },
+        { lastName: { $regex: new RegExp(keyword, "i") } },
+        { skills: { $in: [new RegExp(keyword, "i")] } }, // Use $in to match any skill in the array
+      ],
+    });
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const becomeMentor = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { mentorSkills } = req.body;
+    console.log(mentorSkills);
+    const user = await User.findById(id);
+    user.isA = "Mentor";
+    user.mentorSkills = mentorSkills;
+    const updatedUser = await user.save();
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

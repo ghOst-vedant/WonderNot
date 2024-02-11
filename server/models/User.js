@@ -27,13 +27,29 @@ const UserSchema = new mongoose.Schema(
     },
     picturePath: {
       type: String,
-      default: "https://res.cloudinary.com/dzkugyv7g/image/upload/v1703526486/UserImages/b6gahysyir4yywwjn086.webp",
+      default:
+        "https://res.cloudinary.com/dzkugyv7g/image/upload/v1703526486/UserImages/b6gahysyir4yywwjn086.webp",
     },
     friends: {
       type: Array,
       default: [],
     },
     skills: {
+      type: Array,
+      default: [],
+    },
+    notification: {
+      type: Array,
+      default: [],
+    },
+    seennotification: {
+      type: Array,
+      default: [],
+    },
+    isA: {
+      type: String,
+    },
+    mentorSkills: {
       type: Array,
       default: [],
     },

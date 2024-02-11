@@ -91,7 +91,7 @@ const Post = ({
               <Typography>{likeCount}</Typography>
             </FlexBetween>
             {/* Comment Section */}
-            {comments && (
+            {/* {comments && (
               <FlexBetween gap={"0.3rem"}>
                 <IconButton
                   onClick={() => {
@@ -102,11 +102,8 @@ const Post = ({
                 </IconButton>
                 <Typography>{comments.length}</Typography>
               </FlexBetween>
-            )}
+            )} */}
           </FlexBetween>
-          <IconButton>
-            <ShareOutlined />
-          </IconButton>
         </FlexBetween>
         {isComments && (
           <>
