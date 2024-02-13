@@ -20,7 +20,7 @@ export const register = async (req, res) => {
       });
     }
     let picPath =
-      "https://res.cloudinary.com/dzkugyv7g/image/upload/v1703526486/UserImages/b6gahysyir4yywwjn086.webp";
+      "https://res.cloudinary.com/dzkugyv7g/image/upload/v1707825882/UserImages/kp7mnjp5wkajarapjnr6.png";
     if (req.file) {
       const picture = req.file;
       const fileUri = getDataUri(picture);
