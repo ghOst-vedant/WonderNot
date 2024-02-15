@@ -46,6 +46,12 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    appointments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Appointment",
+      },
+    ],
     isA: {
       type: String,
     },

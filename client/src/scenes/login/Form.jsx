@@ -275,39 +275,6 @@ const Form = () => {
                   </Box>
                   <Box
                     width={"100%"}
-                    borderRadius={"1rem"}
-                    p={"0.75rem"}
-                    fontSize={"2rem"}
-                    display={"flex"}
-                    alignItems={"center"}
-                    gap={"1rem"}
-                  >
-                    <Typography variant="h5">Join as a!!!</Typography>
-                    <FormControlLabel
-                      label="Mentor"
-                      control={
-                        <Checkbox
-                          checked={register.isA === "Mentor"}
-                          onChange={() => {
-                            setRegister({ ...register, isA: "Mentor" });
-                          }}
-                        />
-                      }
-                    />
-                    <FormControlLabel
-                      label="Learner"
-                      control={
-                        <Checkbox
-                          checked={register.isA === "Learner"}
-                          onChange={() => {
-                            setRegister({ ...register, isA: "Learner" });
-                          }}
-                        />
-                      }
-                    />
-                  </Box>
-                  <Box
-                    width={"100%"}
                     border={`1px solid ${palette.neutral.medium}`}
                     borderRadius={"1rem"}
                     p={"0.75rem"}

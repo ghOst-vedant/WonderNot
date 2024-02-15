@@ -5,6 +5,7 @@ import {
   addRemoveFriend,
   searchUser,
   becomeMentor,
+  createAppointment,
 } from "../controllers/users.js";
 import { verifyToken } from "../middleware/auth.js";
 
@@ -15,6 +16,7 @@ router.get("/search", verifyToken, searchUser);
 router.get("/:id", verifyToken, getUser);
 router.get("/:id/friends", verifyToken, getUserFriends);
 router.post("/:id/mentor", verifyToken, becomeMentor);
+router.post("/:id/appointment/:userId", verifyToken, createAppointment);
 
 // update
 router.patch("/:id/:friendId", verifyToken, addRemoveFriend);

@@ -1,12 +1,22 @@
 import {
   LocationOnOutlined,
   WorkOutlineOutlined,
-  Person,
   School,
   Stars,
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme, Chip } from "@mui/material";
-
+import {
+  Box,
+  Typography,
+  Divider,
+  useTheme,
+  Chip,
+  Button,
+  Dialog,
+} from "@mui/material";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers";
 import UserImage from "components/styled/UserImage";
 import FlexBetween from "components/styled/FlexBetween";
 import WidgetWrapper from "components/styled/WidgetWrapper";
@@ -17,8 +27,11 @@ import axios from "axios";
 
 export const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { palette } = useTheme();
   const navigate = useNavigate();
+  const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
@@ -40,6 +53,19 @@ export const UserWidget = ({ userId, picturePath }) => {
     return null;
   }
 
+  const handleSlot = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmSlot = () => {
+    // Handle the selected date here, e.g., send it to the backend
+    console.log("Selected Date:", selectedDate);
+    handleCloseModal();
+  };
   const {
     firstName,
     lastName,
@@ -131,18 +157,6 @@ export const UserWidget = ({ userId, picturePath }) => {
           </Box>
           {isA && (
             <>
-              <Box
-                display={"flex"}
-                gap={"1rem"}
-                alignItems={"center"}
-                justifyItems={"baseline"}
-                mb={"0.5rem"}
-              >
-                <Stars fontSize={"medium"} sx={{ color: main }} />
-                <Typography color={medium} fontSize={"medium"}>
-                  {rating}
-                </Typography>
-              </Box>
               <Box display={"flex"} flexDirection={"column"}>
                 <Box display={"flex"} gap={"1rem"} alignItems={"center"}>
                   <WorkOutlineOutlined
@@ -169,10 +183,78 @@ export const UserWidget = ({ userId, picturePath }) => {
                   ))}
                 </Box>
               </Box>
+              {userId !== _id && (
+                <>
+                  <Box py="0.7rem">
+                    <Button
+                      onClick={handleSlot}
+                      sx={{
+                        fontSize: 13,
+                        color: palette.primary.main,
+                        borderRadius: "2rem",
+                        p: "0.5rem 1.5rem",
+                      }}
+                    >
+                      Book A Session
+                    </Button>
+                  </Box>
+                  <Dialog open={isModalOpen} onClose={handleCloseModal}>
+                    <Box
+                      p={"2rem 2rem"}
+                      display={"flex"}
+                      flexDirection={"column"}
+                    >
+                      <Typography
+                        pb={"0.5rem"}
+                        variant="h5"
+                        alignSelf={"flex-start"}
+                      >
+                        Appointment Slot with Mentor
+                      </Typography>
+                      <Divider sx={{ mb: "0.5rem" }} />
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={["DatePicker"]}>
+                          <DateTimePicker label="Date and Time" />
+                        </DemoContainer>
+                      </LocalizationProvider>
+
+                      <Button
+                        sx={{
+                          mt: "0.85rem",
+                          border: `1px solid ${palette.primary.light}`,
+                          fontSize: 13,
+                          color: medium,
+                          borderRadius: "2rem",
+                          p: "0.5rem 1.5rem",
+                          "&:hover": {
+                            bgcolor: palette.primary.main,
+                            color: "white",
+                            cursor: "pointer",
+                            boxShadow: `0 0px 6px ${palette.primary.light}}`,
+                          },
+                        }}
+                      >
+                        Book
+                      </Button>
+                    </Box>
+                  </Dialog>
+                </>
+              )}
+              <Box
+                display={"flex"}
+                gap={"1rem"}
+                alignItems={"center"}
+                justifyItems={"baseline"}
+                mb={"0.5rem"}
+              >
+                <Stars fontSize={"medium"} sx={{ color: main }} />
+                <Typography color={medium} fontSize={"medium"}>
+                  {rating}
+                </Typography>
+              </Box>
             </>
           )}
         </Box>
-        <Box></Box>
       </WidgetWrapper>
     </>
   );

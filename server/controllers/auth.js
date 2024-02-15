@@ -50,7 +50,6 @@ export const register = async (req, res) => {
       skills,
     });
     const savedUser = await newUser.save();
-    console.log(savedUser);
     res.status(201).json(savedUser);
   } catch (err) {
     console.log(err);

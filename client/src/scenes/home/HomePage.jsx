@@ -7,10 +7,10 @@ import MyPostWidget from "../widgets/MyPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import FriendListing from "../widgets/FriendListing";
 import Mentor from "../widgets/Mentor";
+import Appointment from "../widgets/Appointment";
 
 const HomePage = () => {
   const { _id, picturePath, isA } = useSelector((state) => state.user);
-  console.log(isA);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   return (
     <Box>
@@ -40,8 +40,14 @@ const HomePage = () => {
         </Box>
         {isNonMobileScreens && (
           <>
-            <Box flexBasis={"30%"}>
+            <Box
+              flexBasis={"30%"}
+              gap={"2rem"}
+              display={"flex"}
+              flexDirection={"column"}
+            >
               <FriendListing userId={_id} />
+              <Appointment userId={_id} />
             </Box>
           </>
         )}

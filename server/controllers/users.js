@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-
+import Appointment from "../models/Appointments.js";
 // Read User on the id basis
 
 export const getUser = async (req, res) => {
@@ -81,7 +81,7 @@ export const searchUser = async (req, res) => {
       $or: [
         { firstName: { $regex: new RegExp(keyword, "i") } },
         { lastName: { $regex: new RegExp(keyword, "i") } },
-        { skills: { $in: [new RegExp(keyword, "i")] } }, // Use $in to match any skill in the array
+        { mentorSkills: { $in: [new RegExp(keyword, "i")] } }, // Use $in to match any skill in the array
       ],
     });
 
@@ -103,5 +103,40 @@ export const becomeMentor = async (req, res) => {
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const createAppointment = async (req, res) => {
+  try {
+    const { id, userId } = req.params;
+    const { date } = req.body;
+    const user = await User.findById(id);
+    const existingAppointment = user.appointments.find(
+      (appointment) => appointment.date === date
+    );
+    if (existingAppointment) {
+      return res.status(400).json({
+        error: "Appointment time slot is already booked.",
+      });
+    }
+    const appointment = new Appointment({
+      date,
+      createdBy: user._id,
+      recipient: userId,
+    });
+
+    // Save the appointment
+    await appointment.save();
+
+    user.appointments.push(appointment._id);
+    await user.save();
+    const recipientUser = await User.findById(userId);
+    if (recipientUser) {
+      recipientUser.appointments.push(appointment._id);
+      await recipientUser.save();
+    }
+    return res.status(201).json(appointment);
+  } catch (error) {
+    console.error(error);
   }
 };
