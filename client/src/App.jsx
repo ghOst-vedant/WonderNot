@@ -13,7 +13,11 @@ import { createTheme } from "@mui/material";
 import { themeSettings } from "./theme";
 import axios from "axios";
 import Chat from "./scenes/Chat/Chat";
-axios.defaults.baseURL = import.meta.env.VITE_TEST;
+axios.defaults.baseURL = import.meta.env.VITE_BACKENDURL;
+// import.meta.env.VITE_NODE_ENV === "deployment"
+//   ? import.meta.env.VITE_BACKENDURL
+//   : "http://localhost:3004";
+// axios.defaults.baseURL = import.meta.env.VITE_TEST;
 
 const App = () => {
   const isMobileScreens = useMediaQuery("(max-width:800px)");

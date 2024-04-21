@@ -8,6 +8,7 @@ const io = new socketIoServer(server, {
   cors: {
     origin: "*",
     methods: ["*"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   },
 });
 
