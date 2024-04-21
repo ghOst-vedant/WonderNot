@@ -15,7 +15,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const friends = useSelector((state) => state.user.friends);
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
-  const primaryDark = palette.primary.dark;
+  const friend = palette.primary.friend;
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
   const friendsArray = friends && Object.values(friends);
@@ -87,18 +87,21 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           onClick={() => patchFriend()}
           sx={{
             backgroundColor: primaryLight,
-            p: "0.6rem",
+            p: "0.75rem",
             "&:hover": {
-              bgcolor: palette.primary.main,
-              cursor: "pointer",
-              boxShadow: `0 0px 6px ${palette.primary.light}}`,
+              backgroundColor: primaryLight,
+              boxShadow: `0 0px 3px ${palette.primary.light}}`,
             },
           }}
         >
           {isFriend ? (
-            <PersonRemoveOutlined sx={{ color: primaryDark }} />
+            <PersonRemoveOutlined
+              sx={{
+                color: friend,
+              }}
+            />
           ) : (
-            <PersonAddOutlined sx={{ color: primaryDark }} />
+            <PersonAddOutlined sx={{ color: friend }} />
           )}
         </IconButton>
       )}

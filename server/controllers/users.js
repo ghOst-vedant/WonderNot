@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Appointment from "../models/Appointments.js";
+import AcceptedAppointment from "../models/AcceptedAppointments.js";
 // Read User on the id basis
 
 export const getUser = async (req, res) => {
@@ -31,7 +32,6 @@ export const getUserFriends = async (req, res) => {
 };
 
 // Update add remove firends
-
 export const addRemoveFriend = async (req, res) => {
   try {
     const { id, friendId } = req.params;
@@ -91,11 +91,11 @@ export const searchUser = async (req, res) => {
   }
 };
 
+// Become mentor
 export const becomeMentor = async (req, res) => {
   try {
     const { id } = req.params;
     const { mentorSkills } = req.body;
-    console.log(mentorSkills);
     const user = await User.findById(id);
     user.isA = "Mentor";
     user.mentorSkills = mentorSkills;
@@ -106,28 +106,19 @@ export const becomeMentor = async (req, res) => {
   }
 };
 
+// Create appointment
 export const createAppointment = async (req, res) => {
   try {
     const { id, userId } = req.params;
-    const { date } = req.body;
+    const { description } = req.body;
     const user = await User.findById(id);
-    const existingAppointment = user.appointments.find(
-      (appointment) => appointment.date === date
-    );
-    if (existingAppointment) {
-      return res.status(400).json({
-        error: "Appointment time slot is already booked.",
-      });
-    }
+
     const appointment = new Appointment({
-      date,
+      description,
       createdBy: user._id,
       recipient: userId,
     });
-
-    // Save the appointment
     await appointment.save();
-
     user.appointments.push(appointment._id);
     await user.save();
     const recipientUser = await User.findById(userId);
@@ -138,5 +129,68 @@ export const createAppointment = async (req, res) => {
     return res.status(201).json(appointment);
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const acceptApponintment = async (req, res) => {
+  try {
+    const { id, sender, requestId } = req.params;
+
+    const { meetingLink, date } = req.body;
+    const user = await User.findById(id);
+    const recipient = await User.findById(sender);
+    const acceptedAppointment = new AcceptedAppointment({
+      date,
+      appointmentId: requestId,
+      createdBy: id,
+      meetingLink,
+      recipient: sender,
+    });
+
+    await acceptedAppointment.save();
+    user.acceptedAppointments.push(acceptedAppointment._id);
+    recipient.acceptedAppointments.push(acceptedAppointment._id);
+    await user.save();
+    await recipient.save();
+    return res.status(201).json(acceptedAppointment);
+  } catch (error) {
+    console.error(error);
+  }
+};
+// get Appointment
+export const getAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const appointment = await Appointment.find({ recipient: id });
+    res.status(200).json({ appointment });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const deleteRequest = async (req, res) => {
+  const { requestId } = req.params;
+  try {
+    // Find the request in the database
+    const request = await Appointment.findById(requestId);
+    if (!request) {
+      return res.status(404).json({ error: "Request not found" });
+    }
+    const { createdBy, recipient } = request;
+    const mentee = await User.findById(createdBy);
+    const mentor = await User.findById(recipient);
+    mentee.appointments = mentee.appointments.filter(
+      (id) => id.toString() !== request._id.toString()
+    );
+    mentor.appointments = mentor.appointments.filter(
+      (id) => id.toString() !== request._id.toString()
+    );
+    await mentor.save();
+    await mentee.save();
+    await request.deleteOne();
+    return res.status(204).send(); // Respond with 204 No Content on successful deletion
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };

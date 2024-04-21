@@ -25,7 +25,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   const friends = useSelector((state) => state.user.friends);
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
-  const primaryDark = palette.primary.dark;
+  const friend = palette.primary.friend;
   const main = palette.neutral.main;
   const friendsArray = Object.values(friends);
   const isFriend = friendsArray.find((friend) => friend._id === friendId);
@@ -137,7 +137,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
                 p: "0.75rem",
                 "&:hover": {
                   backgroundColor: primaryLight,
-                  boxShadow: `0 0px 6px ${palette.primary.light}}`,
+                  boxShadow: `0 0px 3px ${palette.primary.light}}`,
                 },
               }}
             >
@@ -145,13 +145,14 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
                 <PersonRemoveOutlined
                   sx={{
                     fontSize: `${isNonMobileScreens ? "18px" : "22px"}`,
-                    color: primaryDark,
+                    color: friend,
                   }}
                 />
               ) : (
                 <PersonAddOutlined
                   sx={{
-                    color: primaryDark,
+                    fontSize: `${isNonMobileScreens ? "18px" : "22px"}`,
+                    color: friend,
                   }}
                 />
               )}

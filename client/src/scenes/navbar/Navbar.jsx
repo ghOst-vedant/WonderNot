@@ -109,11 +109,11 @@ const Navbar = ({ isChat = true }) => {
           <Typography
             fontWeight="bold"
             fontSize="clamp(1rem, 2rem, 2.25rem)"
-            color="primary"
+            color={primaryLight}
             onClick={() => navigate("/home")}
             sx={{
               "&:hover": {
-                color: primaryLight,
+                color: `${theme.palette.primary.dark}`,
                 cursor: "pointer",
               },
             }}

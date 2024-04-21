@@ -141,13 +141,19 @@ const MyPostWidget = ({ picturePath }) => {
           sx={{
             fontSize: 13,
             color: palette.primary.main,
-            borderRadius: "2rem",
-            p: "0.5rem",
+            borderRadius: "0.5rem",
+            p: "0.25rem",
+            // "&:hover": {
+            //   bgcolor: palette.primary.main,
+            //   color: palette.primary.dark,
+            //   cursor: "pointer",
+            //   boxShadow: `0 0px 6px ${palette.primary.light}}`,
+            // },
+            border: `1px solid ${palette.primary.main}`,
             "&:hover": {
-              bgcolor: palette.primary.main,
-              color: palette.primary.dark,
-              cursor: "pointer",
-              boxShadow: `0 0px 6px ${palette.primary.light}}`,
+              backgroundColor: palette.primary.main,
+              color: palette.background.default,
+              borderColor: palette.background.default,
             },
           }}
         >

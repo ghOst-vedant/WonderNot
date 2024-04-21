@@ -3,6 +3,7 @@ import {
   WorkOutlineOutlined,
   School,
   Stars,
+  CalendarToday,
 } from "@mui/icons-material";
 import {
   Box,
@@ -12,11 +13,9 @@ import {
   Chip,
   Button,
   Dialog,
+  InputBase,
 } from "@mui/material";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers";
+
 import UserImage from "components/styled/UserImage";
 import FlexBetween from "components/styled/FlexBetween";
 import WidgetWrapper from "components/styled/WidgetWrapper";
@@ -24,11 +23,11 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 export const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [description, setDescription] = useState();
   const { palette } = useTheme();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -60,12 +59,6 @@ export const UserWidget = ({ userId, picturePath }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  const handleConfirmSlot = () => {
-    // Handle the selected date here, e.g., send it to the backend
-    console.log("Selected Date:", selectedDate);
-    handleCloseModal();
-  };
   const {
     firstName,
     lastName,
@@ -76,7 +69,34 @@ export const UserWidget = ({ userId, picturePath }) => {
     isA,
     mentorSkills,
   } = user;
-
+  const handleAppointment = async () => {
+    try {
+      await toast.promise(createRequest(description, token), {
+        pending: "Sending Request...",
+        success: "Requested successfully!",
+        error: "Error creating request. Please try again later.",
+      });
+      setDescription();
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error requesting Appointment" + error);
+    }
+  };
+  const createRequest = async (description, token) => {
+    try {
+      const message = { description: description };
+      const response = await axios.post(
+        `/users/${_id}/appointment/${userId}`,
+        message,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
   return (
     <>
       <WidgetWrapper>
@@ -123,8 +143,7 @@ export const UserWidget = ({ userId, picturePath }) => {
           >
             <LocationOnOutlined fontSize={"medium"} sx={{ color: main }} />
             <Typography color={medium} fontSize={"medium"}>
-              {" "}
-              {location}{" "}
+              {location}
             </Typography>
           </Box>
           <Box
@@ -137,8 +156,7 @@ export const UserWidget = ({ userId, picturePath }) => {
             {isA && <School fontSize={"medium"} sx={{ color: main }} />}
 
             <Typography color={medium} fontSize={"medium"}>
-              {" "}
-              {isA}{" "}
+              {isA}
             </Typography>
           </Box>
           {/* SKills part */}
@@ -185,19 +203,32 @@ export const UserWidget = ({ userId, picturePath }) => {
               </Box>
               {userId !== _id && (
                 <>
-                  <Box py="0.7rem">
-                    <Button
-                      onClick={handleSlot}
-                      sx={{
-                        fontSize: 13,
-                        color: palette.primary.main,
-                        borderRadius: "2rem",
-                        p: "0.5rem 1.5rem",
-                      }}
-                    >
-                      Book A Session
-                    </Button>
+                  <Box
+                    py="0.7rem"
+                    onClick={handleSlot}
+                    display={"flex"}
+                    sx={{
+                      width: "fit-content",
+                      userSelect: "none",
+                      fontSize: 13,
+                      color: palette.primary.dark,
+                      border: `1px solid ${palette.primary.main}`,
+                      borderColor: palette.primary.light,
+                      borderRadius: "0.7rem",
+                      p: "0.75rem 1.25rem",
+                      "&:hover": {
+                        backgroundColor: palette.primary.main,
+                        color: palette.background.default,
+                        borderColor: palette.background.default,
+                      },
+                    }}
+                  >
+                    <Box display={"flex"} alignItems={"center"} gap={"0.4rem"}>
+                      <CalendarToday />
+                      <Box>Book A Session</Box>
+                    </Box>
                   </Box>
+
                   <Dialog open={isModalOpen} onClose={handleCloseModal}>
                     <Box
                       p={"2rem 2rem"}
@@ -206,31 +237,50 @@ export const UserWidget = ({ userId, picturePath }) => {
                     >
                       <Typography
                         pb={"0.5rem"}
+                        px={"0.75rem"}
                         variant="h5"
                         alignSelf={"flex-start"}
                       >
-                        Appointment Slot with Mentor
+                        Request Appointment Slot with Mentor
                       </Typography>
-                      <Divider sx={{ mb: "0.5rem" }} />
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Divider
+                        sx={{ mb: "0.5rem", bgcolor: palette.neutral.medium }}
+                      />
+                      <InputBase
+                        multiline
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Descripe Your Queries and Purpose"
+                        sx={{
+                          width: "100%",
+                          mt: "0.7rem",
+                          bgcolor: palette.neutral.light,
+                          borderRadius: "0.7rem",
+                          p: "0.9rem 0.7rem",
+                          lineHeight: "1.5rem",
+                        }}
+                      />
+                      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={["DatePicker"]}>
                           <DateTimePicker label="Date and Time" />
                         </DemoContainer>
-                      </LocalizationProvider>
-
+                      </LocalizationProvider> */}
                       <Button
+                        onClick={handleAppointment}
                         sx={{
-                          mt: "0.85rem",
-                          border: `1px solid ${palette.primary.light}`,
+                          alignSelf: "center",
+                          width: "40%",
+                          mt: "1rem",
                           fontSize: 13,
-                          color: medium,
-                          borderRadius: "2rem",
-                          p: "0.5rem 1.5rem",
+                          color: palette.primary.dark,
+                          border: `1px solid ${palette.primary.main}`,
+                          borderColor: palette.primary.light,
+                          borderRadius: "0.7rem",
+                          p: "0.5rem 0.75rem",
                           "&:hover": {
-                            bgcolor: palette.primary.main,
-                            color: "white",
-                            cursor: "pointer",
-                            boxShadow: `0 0px 6px ${palette.primary.light}}`,
+                            backgroundColor: palette.primary.main,
+                            color: palette.background.default,
+                            borderColor: palette.background.default,
                           },
                         }}
                       >

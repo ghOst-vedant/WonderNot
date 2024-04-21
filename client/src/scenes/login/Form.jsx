@@ -384,9 +384,13 @@ const Form = () => {
                     m: "1rem 0",
                     p: "0.5rem 5rem",
                     borderRadius: "1rem",
+                    border: "1px solid ",
                     bgcolor: palette.primary.main,
                     color: palette.background.alt,
-                    "&:hover": { color: palette.primary.main },
+                    "&:hover": {
+                      color: palette.primary.main,
+                      border: `1px solid ${palette.primary.main}`,
+                    },
                   }}
                 >
                   {isLogin ? "login" : "register"}

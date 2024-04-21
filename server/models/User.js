@@ -48,8 +48,12 @@ const UserSchema = new mongoose.Schema(
     },
     appointments: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Appointment",
+        type: String,
+      },
+    ],
+    acceptedAppointments: [
+      {
+        type: String,
       },
     ],
     isA: {
