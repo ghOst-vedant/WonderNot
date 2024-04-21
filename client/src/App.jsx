@@ -14,10 +14,13 @@ import { themeSettings } from "./theme";
 import axios from "axios";
 import Chat from "./scenes/Chat/Chat";
 axios.defaults.baseURL = import.meta.env.VITE_BACKENDURL;
+<<<<<<< HEAD
 // import.meta.env.VITE_NODE_ENV === "deployment"
 //   ? import.meta.env.VITE_BACKENDURL
 //   : "http://localhost:3004";
 // axios.defaults.baseURL = import.meta.env.VITE_TEST;
+=======
+>>>>>>> f09207c20c4faf3b573ea267dd38554f2e033bd3
 
 const App = () => {
   const isMobileScreens = useMediaQuery("(max-width:800px)");
