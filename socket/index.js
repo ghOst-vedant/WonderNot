@@ -1,14 +1,14 @@
 import http from "http";
 import { Server as socketIoServer } from "socket.io";
+import app from "../server";
 import dotenv from "dotenv";
 dotenv.config();
-const server = http.createServer();
+const server = http.createServer(app);
 
 const io = new socketIoServer(server, {
   cors: {
-    origin: ["https://wondernot.vercel.app/", "http://localhost:3004"],
+    origin: "*",
     methods: ["*"],
-    // allowedHeaders: ['Content-Type', 'Authorization'],
   },
 });
 

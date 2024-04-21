@@ -78,3 +78,4 @@ connectDB()
   .catch((err) => {
     console.log(`❌ Failed to connect: ${err} `);
   });
+export default app;
