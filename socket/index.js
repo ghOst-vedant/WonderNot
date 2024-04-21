@@ -6,13 +6,9 @@ const server = http.createServer();
 
 const io = new socketIoServer(server, {
   cors: {
-    origin: "https://wondernot.vercel.app/",
+    origin: ["https://wondernot.vercel.app/", "http://localhost:3004"],
     methods: ["*"],
-<<<<<<< HEAD
-    allowedHeaders: ["Content-Type", "Authorization"],
-=======
     // allowedHeaders: ['Content-Type', 'Authorization'],
->>>>>>> f09207c20c4faf3b573ea267dd38554f2e033bd3
   },
 });
 
