@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const io = new socketIoServer(server, {
   cors: {
-    origin: "*",
+    origin: "https://wondernot.vercel.app",
     methods: ["*"],
   },
 });
