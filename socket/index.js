@@ -1,9 +1,9 @@
 import http from "http";
 import { Server as socketIoServer } from "socket.io";
-import app from "../server";
+
 import dotenv from "dotenv";
 dotenv.config();
-const server = http.createServer(app);
+const server = http.createServer();
 
 const io = new socketIoServer(server, {
   cors: {
