@@ -73,9 +73,10 @@ const AppointRequest = ({ sender, message, requestId }) => {
   };
   const rejectRequest = async (requestId, token) => {
     try {
-      await axios.delete(`/users/${_id}/appointment/${requestId}`, {
+      await axios.delete(`/users/appointment/${requestId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      return false;
     } catch (error) {
       console.error(error);
     }
@@ -95,6 +96,7 @@ const AppointRequest = ({ sender, message, requestId }) => {
       console.error("Error requesting Appointment" + error);
     }
   };
+
   const acceptRequest = async (requestId, token) => {
     try {
       const response = await axios.post(
