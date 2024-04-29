@@ -6,7 +6,6 @@ import { setFriends } from "src/redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import toast from "react-hot-toast";
-import { useSelectedLayoutSegments } from "next/navigation";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
