@@ -42,6 +42,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
           },
         }
       );
+      console.log(response);
       return response.json();
     } catch (error) {
       throw error;

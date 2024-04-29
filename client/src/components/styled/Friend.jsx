@@ -6,6 +6,7 @@ import { setFriends } from "src/redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import toast from "react-hot-toast";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const friendRequest = async (token) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_TEST}/users/${_id}/${friendId}`,
+        `${import.meta.env.VITE_BACKENDURL}/users/${_id}/${friendId}`,
         {
           method: "PATCH",
           headers: {
@@ -34,6 +35,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           },
         }
       );
+      console.log(response);
       return response.json();
     } catch (error) {
       throw error;
