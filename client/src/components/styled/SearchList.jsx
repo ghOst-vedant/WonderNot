@@ -88,7 +88,6 @@ const SearchList = ({ friendId, name, userPicturePath, isChat = false }) => {
         senderId,
         receiverId,
       });
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -150,8 +149,7 @@ const SearchList = ({ friendId, name, userPicturePath, isChat = false }) => {
                 <IconButton
                   onClick={() => {
                     createChat();
-                    navigate(`/chat/${friendId}`);
-                    navigate(0);
+                    navigate(`/chat`);
                   }}
                   sx={{
                     backgroundColor: primaryLight,

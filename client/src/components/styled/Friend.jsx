@@ -34,7 +34,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           },
         }
       );
-      console.log(response);
       return response.json();
     } catch (error) {
       throw error;

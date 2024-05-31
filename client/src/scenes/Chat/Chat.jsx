@@ -116,6 +116,7 @@ const Chat = () => {
                       }}
                     >
                       <Convo
+                        currentChat={currentChat}
                         data={chat}
                         currentUserId={_id}
                         online={onlineStatus(chat)}

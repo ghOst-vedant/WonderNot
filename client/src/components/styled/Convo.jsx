@@ -4,7 +4,7 @@ import { React, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
-const Convo = ({ data, currentUserId, online }) => {
+const Convo = ({ data, currentUserId, online, currentChat }) => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { palette } = useTheme();
 
@@ -31,8 +31,9 @@ const Convo = ({ data, currentUserId, online }) => {
         "&:hover": {
           cursor: "pointer",
           bgcolor: palette.background.default,
-          borderRadius: "1rem",
         },
+        bgcolor: currentChat === data ? palette.background.default : "",
+        borderRadius: "1rem",
       }}
     >
       <FlexBetween>

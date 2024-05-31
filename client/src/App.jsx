@@ -40,10 +40,6 @@ const App = () => {
               path="/chat"
               element={isAuth ? <Chat /> : <Navigate to="/" />}
             />
-            {/* <Route
-              path="/chat/:chatId"
-              element={isAuth ? <Chat /> : <Navigate to="/" />}
-            /> */}
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

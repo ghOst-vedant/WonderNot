@@ -12,6 +12,7 @@ import FriendListing from "../widgets/FriendListing";
 const ProfilePage = () => {
   const [user, setUser] = useState();
   const { userId } = useParams();
+
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
