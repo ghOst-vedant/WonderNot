@@ -78,7 +78,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
   };
   useEffect(() => {
     getUser();
-  }, []);
+  }, [friendId, friends]);
 
   return (
     <>
@@ -96,7 +96,7 @@ const ListFriend = ({ friendId, name, userPicturePath }) => {
             alignSelf={"flex-start"}
             onClick={() => {
               navigate(`/profile/${friendId}`);
-              navigate(0);
+              // navigate(0);
             }}
           >
             <Typography
