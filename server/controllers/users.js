@@ -168,6 +168,32 @@ export const getAppointment = async (req, res) => {
   }
 };
 
+export const getAcceptedMentee = async (req, res) => {
+  try {
+    const { id, isA } = req.params;
+    let accepted = [];
+    if (isA) {
+      accepted = await AcceptedAppointment.find({ recipient: id });
+    } else {
+      accepted = await AcceptedAppointment.find({ createdBy: id });
+    }
+    res.status(200).json({ accepted: accepted });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const getAcceptedMentor = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const accepted = await AcceptedAppointment.find({ recipient: id });
+    console.log(accepted);
+    res.status(200).json({ accepted: accepted });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const deleteRequest = async (req, res) => {
   const { requestId } = req.params;
   try {

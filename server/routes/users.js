@@ -9,6 +9,8 @@ import {
   getAppointment,
   acceptApponintment,
   deleteRequest,
+  getAcceptedMentor,
+  getAcceptedMentee,
 } from "../controllers/users.js";
 import { verifyToken } from "../middleware/auth.js";
 
@@ -27,6 +29,10 @@ router.post(
 );
 router.get("/:id/appointment", verifyToken, getAppointment);
 router.delete("/appointment/:requestId", verifyToken, deleteRequest);
+
+router.get("/:id/acceptedAppointment/mentee", verifyToken, getAcceptedMentor);
+router.get("/:id/acceptedAppointment/mentor", verifyToken, getAcceptedMentee);
+
 // update
 router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
 export default router;

@@ -30,7 +30,7 @@ const AppointRequest = ({ sender, message, requestId }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [calendar, setCalendar] = useState(false);
-  const [meetingLink, setMeetingLink] = useState();
+  const [meetingLink, setMeetingLink] = useState("");
   const handleCalendar = (newValue) => {
     if (moment(newValue).isValid()) {
       const formattedDate = moment(newValue).format("h:mm A, D MMMM, YYYY");
@@ -88,7 +88,7 @@ const AppointRequest = ({ sender, message, requestId }) => {
     try {
       await toast.promise(acceptRequest(requestId, token), {
         pending: "Accepting Request...",
-        success: "Requested successfully!",
+        success: "Accepted successfully!",
         error: "Error creating request. Please try again later.",
       });
       handleCloseModal();

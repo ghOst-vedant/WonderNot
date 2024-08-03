@@ -8,6 +8,8 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import cloudinary from "cloudinary";
+import { Server } from "socket.io";
+import http from "http";
 // Router import
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
@@ -56,6 +58,38 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/chat", chatRoute);
 app.use("/message", messageRoute);
+
+// Socket Io
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: [`http://localhost:5173`, `https://wondernot.vercel.app`],
+    methods: ["*"],
+  },
+});
+let activeUsers = []; // Add this line
+
+io.on("connection", (socket) => {
+  socket.on("new-user-add", (newUserId) => {
+    if (!activeUsers.some((user) => user.userId === newUserId)) {
+      activeUsers.push({ userId: newUserId, socketId: socket.id });
+    }
+    io.emit("get-users", activeUsers);
+  });
+
+  socket.on("disconnect", () => {
+    activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
+    io.emit("get-users", activeUsers);
+  });
+
+  socket.on("send-message", (data) => {
+    const { receiverId } = data;
+    const user = activeUsers.find((user) => user.userId === receiverId);
+    if (user) {
+      io.to(user.socketId).emit("receive-message", data);
+    }
+  });
+}); // Add this block
 // Database setup
 const PORT = process.env.PORT || 6001;
 
@@ -71,8 +105,11 @@ const connectDB = async () => {
 
 connectDB()
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`✅ Server connected to ${PORT}`);
+    // app.listen(PORT, () => {
+    //   console.log(`✅ Server connected to ${PORT}`);
+    // });
+    server.listen(PORT, () => {
+      console.log(`✅ Socket server connected to ${PORT}`);
     });
   })
   .catch((err) => {
