@@ -42,7 +42,7 @@ const Chat = () => {
     getuser();
   }, [_id]);
   useEffect(() => {
-    socket.current = io(`${import.meta.env.VITE_SOCKET}`);
+    socket.current = io(`${import.meta.env.VITE_BACKENDURL}`);
     socket.current.emit("new-user-add", _id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
