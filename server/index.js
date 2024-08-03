@@ -67,7 +67,9 @@ const io = new Server(server, {
     methods: ["*"],
   },
 });
-let activeUsers = []; // Add this line
+
+// The active users state
+let activeUsers = [];
 
 io.on("connection", (socket) => {
   socket.on("new-user-add", (newUserId) => {
@@ -89,14 +91,13 @@ io.on("connection", (socket) => {
       io.to(user.socketId).emit("receive-message", data);
     }
   });
-}); // Add this block
+});
+
 // Database setup
 const PORT = process.env.PORT || 6001;
-
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URL);
-    console.log(`✅ MONGODB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
     process.exit(1);
@@ -105,9 +106,6 @@ const connectDB = async () => {
 
 connectDB()
   .then(() => {
-    // app.listen(PORT, () => {
-    //   console.log(`✅ Server connected to ${PORT}`);
-    // });
     server.listen(PORT, () => {
       console.log(`✅ Socket server connected to ${PORT}`);
     });
