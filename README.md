@@ -3,6 +3,12 @@
 <h1 align="center" ><a href="https://wondernot.vercel.app">:earth_asia: WonderNot</a></h1>
 <p align="center"> A community platform </p>
 
+## 🚀 Quick Start
+
+**Want to see WonderNot in action?** Check out our [Quick Start Guide](QUICKSTART.md) for step-by-step instructions to get WonderNot running on your local machine!
+
+**Quick verification:** After cloning, run `npm run verify` to check if your environment is properly configured.
+
 <h2>Overview of Project</h2>
 
 <p align="center">  The goal of this project is to provide users a platform where they can interacte and connect with each other. Equipped with one-to-one interaction, feeds and many more...
@@ -132,21 +138,28 @@
 
 ## Install dependencies
 
+> **📝 Note:** Before running the application, make sure to set up your environment variables. Copy `.env.example` to `.env` in both client and server directories and configure them with your credentials. See [Quick Start Guide](QUICKSTART.md) for detailed instructions.
+
 ### client
 
-```
+```bash
 cd WonderNot
 cd client
-**Check for the backend-endpoints**
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env file with your configuration
 npm install
-npm run dev
+npm start
 ```
 
 ### server
 
-```
+```bash
 cd WonderNot
 cd server
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env file with your MongoDB, JWT, and Cloudinary credentials
 npm install
 npm start
 ```
