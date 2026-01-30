@@ -19,7 +19,17 @@ git clone https://github.com/ghOst-vedant/WonderNot.git
 cd WonderNot
 ```
 
-### 2. Set Up the Server (Backend)
+### 2. Quick Setup (Recommended)
+
+We've provided a verification script to help you check your setup:
+
+```bash
+npm run verify
+```
+
+This will check if all required files and configurations are in place.
+
+### 3. Set Up the Server (Backend)
 
 ```bash
 cd server
@@ -48,7 +58,7 @@ npm start
 
 The server should now be running on `http://localhost:6001`
 
-### 3. Set Up the Client (Frontend)
+### 4. Set Up the Client (Frontend)
 
 Open a new terminal window:
 
@@ -75,7 +85,7 @@ npm start
 
 The client should now be running on `http://localhost:5173` (or another port shown in the terminal)
 
-### 4. Access WonderNot
+### 5. Access WonderNot
 
 Open your browser and navigate to the URL shown in your terminal (usually `http://localhost:5173`)
 

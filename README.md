@@ -7,6 +7,8 @@
 
 **Want to see WonderNot in action?** Check out our [Quick Start Guide](QUICKSTART.md) for step-by-step instructions to get WonderNot running on your local machine!
 
+**Quick verification:** After cloning, run `npm run verify` to check if your environment is properly configured.
+
 <h2>Overview of Project</h2>
 
 <p align="center">  The goal of this project is to provide users a platform where they can interacte and connect with each other. Equipped with one-to-one interaction, feeds and many more...

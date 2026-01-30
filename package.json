@@ -1,0 +1,27 @@
+{
+  "name": "wondernot",
+  "version": "1.0.0",
+  "description": "A community platform for users to interact and connect",
+  "type": "module",
+  "scripts": {
+    "verify": "node verify-setup.js",
+    "setup": "npm run verify && echo '\nRun the following commands to start WonderNot:\n1. In one terminal: cd server && npm start\n2. In another terminal: cd client && npm start'",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghOst-vedant/WonderNot.git"
+  },
+  "keywords": [
+    "social-media",
+    "community",
+    "platform",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "ghOst-vedant",
+  "license": "ISC"
+}
