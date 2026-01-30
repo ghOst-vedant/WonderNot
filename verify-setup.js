@@ -44,7 +44,7 @@ function checkEnvVariables(envPath, requiredVars) {
   const placeholderVars = [];
 
   requiredVars.forEach(varName => {
-    const regex = new RegExp(`${varName}=(.*)`, 'i');
+    const regex = new RegExp(`^${varName}=([^#\\n\\r]*?)(?:\\s*#|$)`, 'm');
     const match = envContent.match(regex);
     
     if (!match) {
@@ -65,10 +65,10 @@ function checkEnvVariables(envPath, requiredVars) {
     log(`  ⚠ Placeholder values need to be replaced: ${placeholderVars.join(', ')}`, colors.yellow);
   }
 
-  return missingVars.length === 0;
+  return missingVars.length === 0 && placeholderVars.length === 0;
 }
 
-async function main() {
+function main() {
   log('\n🌍 WonderNot Environment Verification\n', colors.cyan);
   
   let allChecks = true;
@@ -87,7 +87,10 @@ async function main() {
   const serverEnvExists = checkFileExists(serverEnvPath, 'Server .env');
   if (serverEnvExists) {
     const requiredServerVars = ['MONGO_URL', 'JWT_SECRET', 'CLOUDINARY_CLOUD_NAME', 'CLOUDINARY_API_KEY', 'CLOUDINARY_API_SECRET'];
-    checkEnvVariables(serverEnvPath, requiredServerVars);
+    const serverEnvValid = checkEnvVariables(serverEnvPath, requiredServerVars);
+    if (!serverEnvValid) {
+      allChecks = false;
+    }
   } else {
     log('  → Run: cd server && cp .env.example .env', colors.yellow);
     allChecks = false;
@@ -103,7 +106,10 @@ async function main() {
   const clientEnvExists = checkFileExists(clientEnvPath, 'Client .env');
   if (clientEnvExists) {
     const requiredClientVars = ['VITE_BACKENDURL'];
-    checkEnvVariables(clientEnvPath, requiredClientVars);
+    const clientEnvValid = checkEnvVariables(clientEnvPath, requiredClientVars);
+    if (!clientEnvValid) {
+      allChecks = false;
+    }
   } else {
     log('  → Run: cd client && cp .env.example .env', colors.yellow);
     allChecks = false;
@@ -143,4 +149,4 @@ async function main() {
   log('='.repeat(50) + '\n', colors.cyan);
 }
 
-main().catch(console.error);
+main();

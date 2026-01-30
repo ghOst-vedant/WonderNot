@@ -60,7 +60,7 @@ The server should now be running on `http://localhost:6001`
 
 ### 4. Set Up the Client (Frontend)
 
-Open a new terminal window:
+Open a new terminal window from the WonderNot root directory:
 
 ```bash
 cd client

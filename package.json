@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "verify": "node verify-setup.js",
-    "setup": "npm run verify && echo '\nRun the following commands to start WonderNot:\n1. In one terminal: cd server && npm start\n2. In another terminal: cd client && npm start'",
+    "setup": "npm run verify && node setup-helper.js",
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
     "install:all": "npm run install:server && npm run install:client"
