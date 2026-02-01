@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/ghOst-vedant/WonderNot/discussions
+    about: Ask questions and discuss with the community
+  - name: Report a security vulnerability
+    url: https://github.com/ghOst-vedant/WonderNot/security/advisories/new
+    about: Please report security vulnerabilities responsibly
